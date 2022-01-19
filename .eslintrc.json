@@ -1,22 +1,48 @@
 {
-    "env": {
-      "node": true,
-      "jest": true
-    },
-    "extends": ["airbnb-base",   "plugin:prettier/recommended"],
-    "plugins": ["prettier"],
-    "parserOptions": {
-      "ecmaVersion": 2018
-    },
-    "rules": {
-      "no-console": "error",
-      "func-names": "off",
-      "no-underscore-dangle": "off",
-      "consistent-return": "off",
-      "jest/expect-expect": "off",
-      "security/detect-object-injection": "off",
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": ["error"]
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
+  },
+  "rules": {
+    "no-console": "error",
+    "func-names": "off",
+    "no-underscore-dangle": "off",
+    "consistent-return": "off",
+    "jest/expect-expect": "off",
+    "security/detect-object-injection": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-param-reassign": "off",
+    "spaced-comment": ["error", "always", { "markers": ["/"] }],
+    "default-param-last": "off",
+    "default-case": "off"
   }
-  
+}
