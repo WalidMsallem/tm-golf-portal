@@ -7,7 +7,7 @@ import {
   UPDATE_FACILITIE,
 } from './facilities.actionTypes';
 import { FacilitiesActions, FacilitiesState } from './facilities.types';
-import { handleErrorMessage } from '../../utils/reducer.helper';
+import { handleErrorMessage } from '../../utils/reducer.utils';
 
 // The initial state of the reducer
 export const initialState: FacilitiesState = {
@@ -18,6 +18,7 @@ export const initialState: FacilitiesState = {
       page: 1,
       totalPages: 0,
       results: [],
+      totalResults: 0,
     },
     facilitie: {},
   },

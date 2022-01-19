@@ -24,6 +24,7 @@ export interface FacilitiesList {
   page: number;
   limit: number;
   totalPages: number;
+  totalResults: number;
 }
 
 export interface DataState {
@@ -59,7 +60,7 @@ export interface CreateFacilitieRequest {
 }
 export interface GetFacilitiesRequest {
   type: typeof GET_FACILITIES.request;
-  query: string;
+  page: string;
 }
 
 export interface UpdateFacilitieRequest {

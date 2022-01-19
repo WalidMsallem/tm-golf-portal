@@ -13,6 +13,7 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-redux": "^7.1.22",
     "@types/redux-saga": "^0.10.5",
+    "@types/uuid": "^8.3.4",
     "axios": "^0.25.0",
     "immer": "^9.0.12",
     "produce": "^0.4.1",
@@ -54,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.1.0",
     "@types/redux-logger": "^3.0.9",
     "eslint": "^8.7.0",
     "eslint-config-airbnb-base": "^15.0.0",

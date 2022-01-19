@@ -1,5 +1,6 @@
-import { takeEvery, put, call, all } from 'redux-saga/effects';
-import * as api from './facilities.services';
+import { takeEvery, put, call, all, delay } from 'redux-saga/effects';
+// uncomplete this to switch to an external server
+// import { AxiosResponse } from 'axios';
 import {
   GetFacilitiesRequest,
   CreateFacilitieRequest,
@@ -15,11 +16,22 @@ import {
   UPDATE_FACILITIE,
   DELETE_FACILITIE,
 } from './facilities.actionTypes';
-import { AxiosResponse } from 'axios';
+// uncomplete this to switch to an external server
+// import * as api from './facilities.services';
+import * as api from './facilities.localStorage.repository';
+import { serialize } from '../../utils/string.utils';
+
+const DELAY = 1000;
 
 export function* queryFacilities(action: GetFacilitiesRequest) {
   try {
-    const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, action.query);
+    const queries = serialize({ page: action.page });
+    // uncomplete this to switch to an external server
+    // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);
+  
+    yield delay(DELAY);
+    const response: Facilitie[] = yield call(api.queryFacilities, queries);
+
     yield put({
       type: GET_FACILITIES.success,
       data: response,
@@ -30,7 +42,12 @@ export function* queryFacilities(action: GetFacilitiesRequest) {
 }
 export function* createFacilitie(action: CreateFacilitieRequest) {
   try {
-    const response: AxiosResponse<Facilitie> = yield call(api.createFacilitie, action.body);
+    // uncomplete this to switch to an external server
+    // const response: AxiosResponse<Facilitie> = yield call(api.createFacilitie, action.body);
+   
+    yield delay(DELAY);
+    const response: Facilitie = yield call(api.createFacilitie, action.body);
+
     yield put({
       type: CREATE_FACILITIE.success,
       data: response,
@@ -41,7 +58,12 @@ export function* createFacilitie(action: CreateFacilitieRequest) {
 }
 export function* getFacilitieById(action: GetFacilitieByIdRequest) {
   try {
-    const response: AxiosResponse<Facilitie> = yield call(api.getFacilitieById, action.id);
+    // uncomplete this to switch to an external server
+    // const response: AxiosResponse<Facilitie> = yield call(api.getFacilitieById, action.id);
+   
+    yield delay(DELAY);
+    const response: Facilitie = yield call(api.getFacilitieById, action.id);
+
     yield put({
       type: GET_FACILITIE_BY_ID.success,
       data: response,
@@ -52,7 +74,12 @@ export function* getFacilitieById(action: GetFacilitieByIdRequest) {
 }
 export function* deleteFacilitie(action: DeleteFacilitieRequest) {
   try {
-    const response: AxiosResponse<Facilitie> = yield call(api.deleteFacilitie, action.id);
+    // uncomplete this to switch to an external server
+    // const response: AxiosResponse<Facilitie> = yield call(api.deleteFacilitie, action.id);
+  
+    yield delay(DELAY);
+    const response: Facilitie = yield call(api.deleteFacilitie, action.id);
+  
     yield put({
       type: DELETE_FACILITIE.success,
       data: response,
@@ -63,7 +90,12 @@ export function* deleteFacilitie(action: DeleteFacilitieRequest) {
 }
 export function* updateFacilitie(action: UpdateFacilitieRequest) {
   try {
-    const response: AxiosResponse<Facilitie> = yield call(api.updateFacilitie, action.id, action.body);
+    // uncomplete this to switch to an external server
+    // const response: AxiosResponse<Facilitie> = yield call(api.updateFacilitie, action.id, action.body);
+   
+    yield delay(DELAY);
+    const response: Facilitie = yield call(api.updateFacilitie, action.id, action.body);
+   
     yield put({
       type: UPDATE_FACILITIE.success,
       data: response,
