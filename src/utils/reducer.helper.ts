@@ -1,4 +1,3 @@
-
 export const handleErrorMessage = (payload: object | any) => {
   try {
     if (!payload.e.response) {

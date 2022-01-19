@@ -59,6 +59,7 @@ export interface CreateFacilitieRequest {
 }
 export interface GetFacilitiesRequest {
   type: typeof GET_FACILITIES.request;
+  query: string;
 }
 
 export interface UpdateFacilitieRequest {
@@ -83,14 +84,10 @@ export interface CreateFacilitieSuccess {
   data: Facilitie;
 }
 
-
- 
-
-export type FacilitiesActions =
-& CreateFacilitieSuccess
-& CreateFacilitieRequest
-& GetFacilitiesRequest
-& UpdateFacilitieRequest
-& DeleteFacilitieRequest
-& GetFacilitieByIdRequest
-& getFacilitiesSuccess
+export type FacilitiesActions = CreateFacilitieSuccess &
+  CreateFacilitieRequest &
+  GetFacilitiesRequest &
+  UpdateFacilitieRequest &
+  DeleteFacilitieRequest &
+  GetFacilitieByIdRequest &
+  getFacilitiesSuccess;

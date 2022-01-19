@@ -14,8 +14,9 @@ import {
   Facilitie,
 } from './facilities.types';
 
-export const getFacilitiesRequest = (): GetFacilitiesRequest => ({
+export const getFacilitiesRequest = (query: string): GetFacilitiesRequest => ({
   type: GET_FACILITIES.request,
+  query,
 });
 export const createFacilitieRequest = (body: Facilitie): CreateFacilitieRequest => ({
   type: CREATE_FACILITIE.request,
