@@ -11,10 +11,10 @@ export enum FacilitieType {
   indoor = 'indoor',
 }
 export interface Facilitie {
-  id: string;
+  id: string | number;
   createdAt: string;
   name: string;
-  type: FacilitieType.indoor | FacilitieType.range;
+  type: string;
   address: string;
 }
 

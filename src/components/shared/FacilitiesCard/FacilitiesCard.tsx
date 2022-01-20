@@ -16,8 +16,7 @@ import { Facilitie } from '../../../features/facilities/facilities.types';
 
 const useStyles = makeStyles({
   root: {
-    background: 'red',
-    boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1) !important',
+    boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
     borderRadius: 4,
     maxHeight: 152,
     margin: '5px 10px',
