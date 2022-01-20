@@ -4,10 +4,17 @@ import {
   DELETE_FACILITIE,
   GET_FACILITIES,
   GET_FACILITIE_BY_ID,
+  LOAD_MOCK_DATA,
   UPDATE_FACILITIE,
 } from './facilities.actionTypes';
 import { FacilitiesActions, FacilitiesState } from './facilities.types';
 import { handleErrorMessage } from '../../utils/reducer.utils';
+import {
+  load as loadFromLocalStorage,
+  encryptAndSave as encryptAndSaveInLocalStorage,
+} from '../../utils/localStorage.utils';
+
+const IS_DUMMY_DATA_LOADED_KEY = 'IS_DUMMY_DATA_LOADED';
 
 // The initial state of the reducer
 export const initialState: FacilitiesState = {
@@ -38,12 +45,13 @@ export const initialState: FacilitiesState = {
       getFacilitieById: '',
       deleteFacilitieById: '',
     },
+    isDummyDataLoaded: loadFromLocalStorage(IS_DUMMY_DATA_LOADED_KEY, false) === true,
   },
 };
 
 const facilitiesReducer = (state: FacilitiesState = initialState, action: FacilitiesActions): FacilitiesState =>
   produce(state, (draft) => {
-    switch (action.id) {
+    switch (action.type) {
       // create Facilitie
       case CREATE_FACILITIE.request:
         draft.local.loading.createFacilitie = true;
@@ -59,8 +67,10 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.local.errors.createFacilitie = handleErrorMessage(action);
 
         break;
-      // list all Facilities
+      // load mock data
+      // get all Facilities
       case GET_FACILITIES.request:
+      case LOAD_MOCK_DATA.request:
         draft.local.loading.fetchFacilities = true;
         draft.local.errors.fetchFacilities = '';
         break;
@@ -69,7 +79,17 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.local.errors.fetchFacilities = '';
         draft.data.facilities = action.facilitiesList;
         break;
+      case LOAD_MOCK_DATA.success:
+        console.log('action.facilitiesList', action);
+
+        draft.local.loading.fetchFacilities = false;
+        draft.local.errors.fetchFacilities = '';
+        draft.data.facilities = action.facilitiesList;
+        encryptAndSaveInLocalStorage(IS_DUMMY_DATA_LOADED_KEY, true);
+        draft.local.isDummyDataLoaded = true;
+        break;
       case GET_FACILITIES.failure:
+      case LOAD_MOCK_DATA.failure:
         draft.local.loading.fetchFacilities = false;
         try {
           draft.local.errors.fetchFacilities = handleErrorMessage(action);

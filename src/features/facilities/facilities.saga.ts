@@ -8,6 +8,7 @@ import {
   DeleteFacilitieRequest,
   UpdateFacilitieRequest,
   Facilitie,
+  LoadMockDataRequest,
 } from './facilities.types';
 import {
   GET_FACILITIES,
@@ -15,17 +16,18 @@ import {
   GET_FACILITIE_BY_ID,
   UPDATE_FACILITIE,
   DELETE_FACILITIE,
+  LOAD_MOCK_DATA,
 } from './facilities.actionTypes';
 // uncomplete this to switch to an external server
 // import * as api from './facilities.services';
-import * as api from './facilities.localStorage.repository';
-import { serialize } from '../../utils/string.utils';
+import * as api from './facilities.localStorage.services';
 
 const DELAY = 1000;
 
 export function* queryFacilities(action: GetFacilitiesRequest) {
   try {
-    const queries = serialize({ page: action.page });
+    const queries = new URLSearchParams({ page: action.page }).toString();
+
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);
 
@@ -34,7 +36,7 @@ export function* queryFacilities(action: GetFacilitiesRequest) {
 
     yield put({
       type: GET_FACILITIES.success,
-      data: response,
+      facilitiesList: response,
     });
   } catch (e) {
     yield put({ type: GET_FACILITIES.failure, e });
@@ -105,6 +107,20 @@ export function* updateFacilitie(action: UpdateFacilitieRequest) {
   }
 }
 
+export function* loadMockData(action: LoadMockDataRequest) {
+  try {
+    yield delay(DELAY);
+    const response: Facilitie = yield call(api.loadMockData, action.data);
+    console.log('hello word', response);
+    yield put({
+      type: LOAD_MOCK_DATA.success,
+      facilitiesList: response,
+    });
+  } catch (e) {
+    yield put({ type: LOAD_MOCK_DATA.failure, e });
+  }
+}
+
 function* FacilitiesSaga() {
   yield all([
     takeEvery(GET_FACILITIES.request, queryFacilities),
@@ -112,6 +128,7 @@ function* FacilitiesSaga() {
     takeEvery(UPDATE_FACILITIE.request, updateFacilitie),
     takeEvery(DELETE_FACILITIE.request, deleteFacilitie),
     takeEvery(CREATE_FACILITIE.request, createFacilitie),
+    takeEvery(LOAD_MOCK_DATA.request, loadMockData),
   ]);
 }
 

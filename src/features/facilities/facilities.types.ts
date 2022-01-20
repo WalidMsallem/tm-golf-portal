@@ -4,6 +4,7 @@ import {
   UPDATE_FACILITIE,
   DELETE_FACILITIE,
   GET_FACILITIE_BY_ID,
+  LOAD_MOCK_DATA,
 } from './facilities.actionTypes';
 
 export enum FacilitieType {
@@ -47,12 +48,16 @@ export interface ErrorsState {
 export interface LocalState {
   loading: LoadingState;
   errors: ErrorsState;
+  isDummyDataLoaded: boolean;
 }
 export interface FacilitiesState {
   data: DataState;
   local: LocalState;
 }
-
+export interface LoadMockDataRequest {
+  type: typeof LOAD_MOCK_DATA.request;
+  data: Facilitie[];
+}
 export interface CreateFacilitieRequest {
   type: typeof CREATE_FACILITIE.request;
   body: Facilitie;
@@ -90,4 +95,5 @@ export type FacilitiesActions = CreateFacilitieSuccess &
   UpdateFacilitieRequest &
   DeleteFacilitieRequest &
   GetFacilitieByIdRequest &
+  LoadMockDataRequest &
   getFacilitiesSuccess;

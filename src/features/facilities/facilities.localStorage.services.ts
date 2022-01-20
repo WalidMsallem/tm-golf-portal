@@ -29,9 +29,10 @@ export const createFacilitie = (body: Facilitie): Facilitie | void => {
 export const queryFacilities = (queries: string): FacilitiesList | void => {
   try {
     const { page: current } = paramsToObject(queries);
+
     const initialState = facilitiesInitialState.data.facilities.results;
     const facilities = load(MODEL_NAME, initialState);
-
+    console.log('wwwww', typeof facilities);
     const {
       totalItems: totalResults,
       currentPage: page,
@@ -91,6 +92,24 @@ export const deleteFacilitie = (id: string): Facilitie | void => {
     encryptAndSave(MODEL_NAME, facilities);
 
     return facilities;
+  } catch (e) {
+    handleError(e);
+  }
+};
+
+export const loadMockData = (data: Facilitie[]): FacilitiesList | void => {
+  try {
+    encryptAndSave(MODEL_NAME, data);
+
+    const { totalItems: totalResults, currentPage: page, pageSize: limit, totalPages, results } = paginate(data, 1, 10);
+
+    return {
+      totalResults,
+      page,
+      limit,
+      totalPages,
+      results,
+    };
   } catch (e) {
     handleError(e);
   }
