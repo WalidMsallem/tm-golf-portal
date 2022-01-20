@@ -6,16 +6,15 @@ import {
   GET_FACILITIE_BY_ID,
 } from './facilities.actionTypes';
 
-enum FacilitieType {
+export enum FacilitieType {
   range = 'range',
   indoor = 'indoor',
 }
-
 export interface Facilitie {
   id: string;
   createdAt: string;
   name: string;
-  type: FacilitieType;
+  type: FacilitieType.indoor | FacilitieType.range;
   address: string;
 }
 
@@ -29,7 +28,7 @@ export interface FacilitiesList {
 
 export interface DataState {
   facilities: FacilitiesList;
-  facilitie: Facilitie | {};
+  facilitie: Facilitie | object;
 }
 export interface LoadingState {
   fetchFacilities: boolean;

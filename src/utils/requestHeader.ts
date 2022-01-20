@@ -1,13 +1,10 @@
-// import { load as loadToken } from '../utils/storage'
-// export const getToken = (): string | null =>
-//   localStorage.getItem('access_token')
+/* eslint-disable  @typescript-eslint/no-explicit-any  */
 
 export const requestHeader = (options: object | null, overrideToken?: string | any): object => {
   return {
     headers: {
-      //   Authorization: `Bearer ${overrideToken || loadToken('access_token')}`,
-      // Authorization: `Bearer ${tt}`,
-      // 'Access-Control-Allow-Origin': 'sandbox.api.video',
+      // laod token here
+      // Authorization: `Bearer ${token}`,
       ...options,
     },
   };

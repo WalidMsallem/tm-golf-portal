@@ -3,14 +3,19 @@ type SerializePaylod = {
 };
 
 export const serialize = function (obj: SerializePaylod): string {
-  var str = [];
-  for (var p in obj)
-    if (obj.hasOwnProperty(p)) {
-      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+  const str: string[] = [];
+  Object.keys(obj).forEach((key) => {
+    if (obj.prototype.hasOwnProperty.call(key, 'key')) {
+      str.push(`${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`);
     }
+  });
+  //   for (const p in obj)
+  //     if (obj.hasOwnProperty(p)) {
+  //       str.push(`${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`);
+  //     }
   return `?${str.join('&')}`;
 };
 
 export const paramsToObject = (url: string) => {
-  return JSON.parse('{"' + decodeURI(url).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+  return JSON.parse(`{"${decodeURI(url).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"')}"}`);
 };

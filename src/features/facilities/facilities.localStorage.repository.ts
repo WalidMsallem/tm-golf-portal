@@ -2,15 +2,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { Facilitie, FacilitiesList } from './facilities.types';
 import { load, encryptAndSave } from '../../utils/localStorage.utils';
 import { initialState as facilitiesInitialState } from './facilities.reducer';
-import { paginate } from '../../utils/pagination.utils';
+import paginate from '../../utils/pagination.utils';
 import { paramsToObject } from '../../utils/string.utils';
 
 const MODEL_NAME = 'FACILITIES';
 
 export const createFacilitie = (body: Facilitie): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
-    let facilities = load(MODEL_NAME, initialState);
+    const initialState = facilitiesInitialState.data.facilities.results;
+    const facilities = load(MODEL_NAME, initialState);
 
     const newfacilitie: Facilitie = { ...body, id: uuidv4() };
     facilities.unshift(newfacilitie);
@@ -18,15 +18,15 @@ export const createFacilitie = (body: Facilitie): Facilitie | void => {
 
     return newfacilitie;
   } catch (e) {
-    console.error(e);
+    throw new Error(e);
   }
 };
 
 export const queryFacilities = (queries: string): FacilitiesList | void => {
   try {
-    let { page: current } = paramsToObject(queries);
-    let initialState = facilitiesInitialState.data.facilities.results;
-    let facilities = load(MODEL_NAME, initialState);
+    const { page: current } = paramsToObject(queries);
+    const initialState = facilitiesInitialState.data.facilities.results;
+    const facilities = load(MODEL_NAME, initialState);
 
     const {
       totalItems: totalResults,
@@ -44,24 +44,24 @@ export const queryFacilities = (queries: string): FacilitiesList | void => {
       results,
     };
   } catch (e) {
-    console.error(e);
+    throw new Error(e);
   }
 };
 
 export const getFacilitieById = (id: string): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
-    let facilities: Facilitie[] = load(MODEL_NAME, initialState);
+    const initialState = facilitiesInitialState.data.facilities.results;
+    const facilities: Facilitie[] = load(MODEL_NAME, initialState);
 
     return facilities.find((element) => element.id === id);
   } catch (e) {
-    console.error(e);
+    throw new Error(e);
   }
 };
 
 export const updateFacilitie = (id: string, body: Facilitie): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
+    const initialState = facilitiesInitialState.data.facilities.results;
     let facilities = load(MODEL_NAME, initialState);
 
     facilities = facilities.map((element: Facilitie) => {
@@ -74,13 +74,13 @@ export const updateFacilitie = (id: string, body: Facilitie): Facilitie | void =
 
     return body;
   } catch (e) {
-    console.error(e);
+    throw new Error(e);
   }
 };
 
 export const deleteFacilitie = (id: string): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
+    const initialState = facilitiesInitialState.data.facilities.results;
     let facilities = load(MODEL_NAME, initialState);
 
     facilities = facilities.filter((element: Facilitie) => element.id !== id);
@@ -88,6 +88,6 @@ export const deleteFacilitie = (id: string): Facilitie | void => {
 
     return facilities;
   } catch (e) {
-    console.error(e);
+    throw new Error(e);
   }
 };

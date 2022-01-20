@@ -43,6 +43,8 @@
     "no-param-reassign": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
     "default-param-last": "off",
-    "default-case": "off"
+    "default-case": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"]
   }
 }

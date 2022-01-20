@@ -28,7 +28,7 @@ export function* queryFacilities(action: GetFacilitiesRequest) {
     const queries = serialize({ page: action.page });
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);
-  
+
     yield delay(DELAY);
     const response: Facilitie[] = yield call(api.queryFacilities, queries);
 
@@ -44,7 +44,7 @@ export function* createFacilitie(action: CreateFacilitieRequest) {
   try {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.createFacilitie, action.body);
-   
+
     yield delay(DELAY);
     const response: Facilitie = yield call(api.createFacilitie, action.body);
 
@@ -60,7 +60,7 @@ export function* getFacilitieById(action: GetFacilitieByIdRequest) {
   try {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.getFacilitieById, action.id);
-   
+
     yield delay(DELAY);
     const response: Facilitie = yield call(api.getFacilitieById, action.id);
 
@@ -76,10 +76,10 @@ export function* deleteFacilitie(action: DeleteFacilitieRequest) {
   try {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.deleteFacilitie, action.id);
-  
+
     yield delay(DELAY);
     const response: Facilitie = yield call(api.deleteFacilitie, action.id);
-  
+
     yield put({
       type: DELETE_FACILITIE.success,
       data: response,
@@ -92,10 +92,10 @@ export function* updateFacilitie(action: UpdateFacilitieRequest) {
   try {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.updateFacilitie, action.id, action.body);
-   
+
     yield delay(DELAY);
     const response: Facilitie = yield call(api.updateFacilitie, action.id, action.body);
-   
+
     yield put({
       type: UPDATE_FACILITIE.success,
       data: response,
