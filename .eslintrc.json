@@ -47,6 +47,9 @@
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/no-explicit-any": "off",
-    "no-console": "warn"
+    "no-console": "warn",
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "no-undef": "off"
   }
 }
