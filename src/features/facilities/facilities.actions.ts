@@ -18,6 +18,7 @@ export const getFacilitiesRequest = (page: string): GetFacilitiesRequest => ({
   type: GET_FACILITIES.request,
   page,
 });
+
 export const createFacilitieRequest = (body: Facilitie): CreateFacilitieRequest => ({
   type: CREATE_FACILITIE.request,
   body,

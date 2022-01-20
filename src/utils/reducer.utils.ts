@@ -1,4 +1,4 @@
-/* eslint-disable import/prefer-default-export, @typescript-eslint/no-explicit-any  */
+/* eslint-disable import/prefer-default-export */
 
 export const handleErrorMessage = (payload: object | any) => {
   try {
