@@ -45,6 +45,7 @@
     "default-param-last": "off",
     "default-case": "off",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"]
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }

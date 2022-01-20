@@ -7,6 +7,10 @@ import { paramsToObject } from '../../utils/string.utils';
 
 const MODEL_NAME = 'FACILITIES';
 
+const handleError = (e: any) => {
+  throw e;
+};
+
 export const createFacilitie = (body: Facilitie): Facilitie | void => {
   try {
     const initialState = facilitiesInitialState.data.facilities.results;
@@ -18,7 +22,7 @@ export const createFacilitie = (body: Facilitie): Facilitie | void => {
 
     return newfacilitie;
   } catch (e) {
-    throw new Error(e);
+    handleError(e);
   }
 };
 
@@ -44,7 +48,7 @@ export const queryFacilities = (queries: string): FacilitiesList | void => {
       results,
     };
   } catch (e) {
-    throw new Error(e);
+    handleError(e);
   }
 };
 
@@ -55,7 +59,7 @@ export const getFacilitieById = (id: string): Facilitie | void => {
 
     return facilities.find((element) => element.id === id);
   } catch (e) {
-    throw new Error(e);
+    handleError(e);
   }
 };
 
@@ -74,7 +78,7 @@ export const updateFacilitie = (id: string, body: Facilitie): Facilitie | void =
 
     return body;
   } catch (e) {
-    throw new Error(e);
+    handleError(e);
   }
 };
 
@@ -88,6 +92,6 @@ export const deleteFacilitie = (id: string): Facilitie | void => {
 
     return facilities;
   } catch (e) {
-    throw new Error(e);
+    handleError(e);
   }
 };

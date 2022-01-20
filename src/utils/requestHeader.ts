@@ -1,4 +1,4 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any  */
+/* eslint-disable  */
 
 export const requestHeader = (options: object | null, overrideToken?: string | any): object => {
   return {
