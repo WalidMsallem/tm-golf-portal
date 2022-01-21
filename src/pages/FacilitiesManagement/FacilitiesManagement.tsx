@@ -54,15 +54,18 @@ const FacilitiesManagement = () => {
   };
 
   const renderContent = () => {
+    const skeletonData = Array(10).fill(0);
     if (loading.fetchFacilities) {
-      return Array(10)
-        .fill(0)
-        .map((_: any, i: number) => {
-          return <CardSkeleton key={i} />;
-        });
+      return (
+        <Grid container sx={{ marginX: 5 }}>
+          {skeletonData.map((_: any, i: number) => (
+            <CardSkeleton key={i} />
+          ))}
+        </Grid>
+      );
     }
     return (
-      <>
+      <Grid container sx={{ marginX: 5 }}>
         <Grid container wrap="wrap">
           {facilities.results.map((facilitieItem) => {
             return (
@@ -74,15 +77,15 @@ const FacilitiesManagement = () => {
         </Grid>
         <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
           <Pagination
-            count={10}
             variant="outlined"
             shape="rounded"
             page={Number(page)}
+            count={Number(facilities.totalPages)}
             className={classes.pagination}
             onChange={handleChangePage}
           />
         </Grid>
-      </>
+      </Grid>
     );
   };
 

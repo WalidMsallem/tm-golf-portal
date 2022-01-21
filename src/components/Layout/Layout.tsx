@@ -1,6 +1,9 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import { ToastContainer, toast } from 'react-toastify';
 import Header from '../Header';
 
 const useStyles = makeStyles({
@@ -26,6 +29,7 @@ export default function Layout({ children }: LayoutProps) {
       <Grid container className={classes.content}>
         {children}
       </Grid>
+      <ToastContainer />
     </Grid>
   );
 }

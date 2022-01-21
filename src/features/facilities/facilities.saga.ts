@@ -21,8 +21,7 @@ import {
 // uncomplete this to switch to an external server
 // import * as api from './facilities.services';
 import * as api from './facilities.localStorage.services';
-
-const DELAY = 1000;
+import { CALL_LOCAL_STORAGE_DELAY } from '../../constants/global.constants';
 
 export function* queryFacilities(action: GetFacilitiesRequest) {
   try {
@@ -30,7 +29,7 @@ export function* queryFacilities(action: GetFacilitiesRequest) {
 
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);
-    yield delay(DELAY);
+    yield delay(CALL_LOCAL_STORAGE_DELAY);
     const response: Facilitie[] = yield call(api.queryFacilities, queries);
 
     yield put({
@@ -46,7 +45,7 @@ export function* createFacilitie(action: CreateFacilitieRequest) {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.createFacilitie, action.body);
 
-    yield delay(DELAY);
+    yield delay(CALL_LOCAL_STORAGE_DELAY);
     const response: Facilitie = yield call(api.createFacilitie, action.body);
 
     yield put({
@@ -62,7 +61,7 @@ export function* getFacilitieById(action: GetFacilitieByIdRequest) {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.getFacilitieById, action.id);
 
-    yield delay(DELAY);
+    yield delay(CALL_LOCAL_STORAGE_DELAY);
     const response: Facilitie = yield call(api.getFacilitieById, action.id);
 
     yield put({
@@ -78,7 +77,7 @@ export function* deleteFacilitie(action: DeleteFacilitieRequest) {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.deleteFacilitie, action.id);
 
-    yield delay(DELAY);
+    yield delay(CALL_LOCAL_STORAGE_DELAY);
     const response: Facilitie = yield call(api.deleteFacilitie, action.id);
 
     yield put({
@@ -94,7 +93,7 @@ export function* updateFacilitie(action: UpdateFacilitieRequest) {
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.updateFacilitie, action.id, action.body);
 
-    yield delay(DELAY);
+    yield delay(CALL_LOCAL_STORAGE_DELAY);
     const response: Facilitie = yield call(api.updateFacilitie, action.id, action.body);
 
     yield put({
@@ -108,7 +107,7 @@ export function* updateFacilitie(action: UpdateFacilitieRequest) {
 
 export function* loadMockData(action: LoadMockDataRequest) {
   try {
-    yield delay(DELAY);
+    yield delay(CALL_LOCAL_STORAGE_DELAY);
     const response: Facilitie = yield call(api.loadMockData, action.data);
     yield put({
       type: LOAD_MOCK_DATA.success,

@@ -63,7 +63,6 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
       case CREATE_FACILITIE.failure:
         draft.local.loading.createFacilitie = false;
         draft.local.errors.createFacilitie = handleErrorMessage(action);
-
         break;
       // load mock data
       // get all Facilities
@@ -72,6 +71,7 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.local.loading.fetchFacilities = true;
         draft.local.errors.fetchFacilities = '';
         break;
+
       case GET_FACILITIES.success:
         draft.local.loading.fetchFacilities = false;
         draft.local.errors.fetchFacilities = '';
@@ -83,14 +83,11 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.data.facilities = action.facilitiesList;
         encryptAndSaveInLocalStorage(IS_DUMMY_DATA_LOADED_KEY, true);
         break;
+
       case GET_FACILITIES.failure:
       case LOAD_MOCK_DATA.failure:
         draft.local.loading.fetchFacilities = false;
-        try {
-          draft.local.errors.fetchFacilities = handleErrorMessage(action);
-        } catch (e) {
-          draft.local.errors.fetchFacilities = 'Server error';
-        }
+        draft.local.errors.fetchFacilities = handleErrorMessage(action);
         break;
       // get Facilitie by Id
       case GET_FACILITIE_BY_ID.request:
@@ -104,11 +101,9 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         break;
       case GET_FACILITIE_BY_ID.failure:
         draft.local.loading.getFacilitieById = false;
-        try {
-          draft.local.errors.getFacilitieById = handleErrorMessage(action);
-        } catch (e) {
-          draft.local.errors.getFacilitieById = 'Server error';
-        }
+
+        draft.local.errors.getFacilitieById = handleErrorMessage(action);
+
         break;
       // update Facilitie by Id
       case UPDATE_FACILITIE.request:
@@ -127,11 +122,9 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         break;
       case UPDATE_FACILITIE.failure:
         draft.local.loading.updateFacilitie = false;
-        try {
-          draft.local.errors.updateFacilitie = handleErrorMessage(action);
-        } catch (e) {
-          draft.local.errors.updateFacilitie = 'Server error';
-        }
+
+        draft.local.errors.updateFacilitie = handleErrorMessage(action);
+
         break;
       // delete Facilitie by Id
       case DELETE_FACILITIE.request:
@@ -145,11 +138,8 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         break;
       case DELETE_FACILITIE.failure:
         draft.local.loading.deleteFacilitieById = false;
-        try {
-          draft.local.errors.deleteFacilitieById = handleErrorMessage(action);
-        } catch (e) {
-          draft.local.errors.deleteFacilitieById = 'Server error';
-        }
+        draft.local.errors.deleteFacilitieById = handleErrorMessage(action);
+
         break;
     }
   });

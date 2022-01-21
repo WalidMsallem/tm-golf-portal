@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
     borderRadius: 4,
     maxHeight: 152,
-    margin: '5px 10px',
+    margin: '15px',
     padding: '15px 25px !important',
     display: 'flex',
     justifyContent: 'space-between',
