@@ -4,18 +4,18 @@ import {
   UPDATE_FACILITIE,
   DELETE_FACILITIE,
   GET_FACILITIE_BY_ID,
+  LOAD_MOCK_DATA,
 } from './facilities.actionTypes';
 
-enum FacilitieType {
+export enum FacilitieTypes {
   range = 'range',
   indoor = 'indoor',
 }
-
 export interface Facilitie {
-  id: string;
+  id: string | number;
   createdAt: string;
   name: string;
-  type: FacilitieType;
+  type: string;
   address: string;
 }
 
@@ -29,7 +29,7 @@ export interface FacilitiesList {
 
 export interface DataState {
   facilities: FacilitiesList;
-  facilitie: Facilitie | {};
+  facilitie: Facilitie | object;
 }
 export interface LoadingState {
   fetchFacilities: boolean;
@@ -53,7 +53,10 @@ export interface FacilitiesState {
   data: DataState;
   local: LocalState;
 }
-
+export interface LoadMockDataRequest {
+  type: typeof LOAD_MOCK_DATA.request;
+  data: Facilitie[];
+}
 export interface CreateFacilitieRequest {
   type: typeof CREATE_FACILITIE.request;
   body: Facilitie;
@@ -61,6 +64,8 @@ export interface CreateFacilitieRequest {
 export interface GetFacilitiesRequest {
   type: typeof GET_FACILITIES.request;
   page: string;
+  search: string;
+  facilitietype: string;
 }
 
 export interface UpdateFacilitieRequest {
@@ -91,4 +96,5 @@ export type FacilitiesActions = CreateFacilitieSuccess &
   UpdateFacilitieRequest &
   DeleteFacilitieRequest &
   GetFacilitieByIdRequest &
+  LoadMockDataRequest &
   getFacilitiesSuccess;

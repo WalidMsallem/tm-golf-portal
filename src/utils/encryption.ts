@@ -2,6 +2,7 @@
 // import CryptoJS from 'crypto-js/core';
 
 import CryptoJS from 'crypto-js';
+
 const phrase = 'TRACK_MAN';
 
 const encryption = {

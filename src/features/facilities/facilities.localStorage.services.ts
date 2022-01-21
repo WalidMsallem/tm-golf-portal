@@ -2,15 +2,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { Facilitie, FacilitiesList } from './facilities.types';
 import { load, encryptAndSave } from '../../utils/localStorage.utils';
 import { initialState as facilitiesInitialState } from './facilities.reducer';
-import { paginate } from '../../utils/pagination.utils';
-import { paramsToObject } from '../../utils/string.utils';
+import paginate from '../../utils/pagination.utils';
+import { parseSearchUrl, isEmptySting } from '../../utils/string.utils';
+import { MODEL_NAME, regExpMatchAll } from '../../constants/global.constants';
 
-const MODEL_NAME = 'FACILITIES';
+const handleError = (e: any) => {
+  throw e;
+};
 
 export const createFacilitie = (body: Facilitie): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
-    let facilities = load(MODEL_NAME, initialState);
+    const initialState = facilitiesInitialState.data.facilities.results;
+    const facilities = load(MODEL_NAME, initialState);
 
     const newfacilitie: Facilitie = { ...body, id: uuidv4() };
     facilities.unshift(newfacilitie);
@@ -18,15 +21,22 @@ export const createFacilitie = (body: Facilitie): Facilitie | void => {
 
     return newfacilitie;
   } catch (e) {
-    console.error(e);
+    handleError(e);
   }
 };
 
 export const queryFacilities = (queries: string): FacilitiesList | void => {
   try {
-    let { page: current } = paramsToObject(queries);
-    let initialState = facilitiesInitialState.data.facilities.results;
-    let facilities = load(MODEL_NAME, initialState);
+    const { page: current, search, type } = parseSearchUrl(queries);
+
+    const initialState = facilitiesInitialState.data.facilities.results;
+
+    let facilities: Facilitie[] = load(MODEL_NAME, initialState);
+
+    const searchRegExp = isEmptySting(search) ? regExpMatchAll : new RegExp(search, 'i');
+    const typeRegExp = isEmptySting(type) ? regExpMatchAll : new RegExp(type, 'i');
+
+    facilities = facilities.filter((facilitie) => searchRegExp.test(facilitie.name) && typeRegExp.test(facilitie.type));
 
     const {
       totalItems: totalResults,
@@ -44,24 +54,24 @@ export const queryFacilities = (queries: string): FacilitiesList | void => {
       results,
     };
   } catch (e) {
-    console.error(e);
+    handleError(e);
   }
 };
 
 export const getFacilitieById = (id: string): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
-    let facilities: Facilitie[] = load(MODEL_NAME, initialState);
+    const initialState = facilitiesInitialState.data.facilities.results;
+    const facilities: Facilitie[] = load(MODEL_NAME, initialState);
 
     return facilities.find((element) => element.id === id);
   } catch (e) {
-    console.error(e);
+    handleError(e);
   }
 };
 
 export const updateFacilitie = (id: string, body: Facilitie): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
+    const initialState = facilitiesInitialState.data.facilities.results;
     let facilities = load(MODEL_NAME, initialState);
 
     facilities = facilities.map((element: Facilitie) => {
@@ -74,13 +84,13 @@ export const updateFacilitie = (id: string, body: Facilitie): Facilitie | void =
 
     return body;
   } catch (e) {
-    console.error(e);
+    handleError(e);
   }
 };
 
 export const deleteFacilitie = (id: string): Facilitie | void => {
   try {
-    let initialState = facilitiesInitialState.data.facilities.results;
+    const initialState = facilitiesInitialState.data.facilities.results;
     let facilities = load(MODEL_NAME, initialState);
 
     facilities = facilities.filter((element: Facilitie) => element.id !== id);
@@ -88,6 +98,24 @@ export const deleteFacilitie = (id: string): Facilitie | void => {
 
     return facilities;
   } catch (e) {
-    console.error(e);
+    handleError(e);
+  }
+};
+
+export const loadMockData = (data: Facilitie[]): FacilitiesList | void => {
+  try {
+    encryptAndSave(MODEL_NAME, data);
+
+    const { totalItems: totalResults, currentPage: page, pageSize: limit, totalPages, results } = paginate(data, 1, 10);
+
+    return {
+      totalResults,
+      page,
+      limit,
+      totalPages,
+      results,
+    };
+  } catch (e) {
+    handleError(e);
   }
 };

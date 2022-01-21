@@ -43,6 +43,14 @@
     "no-param-reassign": "off",
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
     "default-param-last": "off",
-    "default-case": "off"
+    "default-case": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-console": "warn",
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "no-undef": "off",
+    "prefer-template": "off"
   }
 }

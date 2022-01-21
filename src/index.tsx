@@ -1,4 +1,3 @@
-
 import './index.css';
 
 import React from 'react';
@@ -8,7 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './features/store';
-
 
 ReactDOM.render(
   <React.StrictMode>

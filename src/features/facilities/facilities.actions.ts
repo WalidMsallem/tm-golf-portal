@@ -4,6 +4,7 @@ import {
   UPDATE_FACILITIE,
   DELETE_FACILITIE,
   GET_FACILITIE_BY_ID,
+  LOAD_MOCK_DATA,
 } from './facilities.actionTypes';
 import {
   GetFacilitiesRequest,
@@ -12,12 +13,16 @@ import {
   DeleteFacilitieRequest,
   GetFacilitieByIdRequest,
   Facilitie,
+  LoadMockDataRequest,
 } from './facilities.types';
 
-export const getFacilitiesRequest = (page: string): GetFacilitiesRequest => ({
+export const getFacilitiesRequest = (page: string, search: string, facilitietype: string): GetFacilitiesRequest => ({
   type: GET_FACILITIES.request,
   page,
+  search,
+  facilitietype,
 });
+
 export const createFacilitieRequest = (body: Facilitie): CreateFacilitieRequest => ({
   type: CREATE_FACILITIE.request,
   body,
@@ -36,4 +41,8 @@ export const deleteFacilitieRequest = (id: string): DeleteFacilitieRequest => ({
 export const getFacilitieByIdRequest = (id: string): GetFacilitieByIdRequest => ({
   type: GET_FACILITIE_BY_ID.request,
   id,
+});
+export const loadMockDataRequest = (data: Facilitie[]): LoadMockDataRequest => ({
+  type: LOAD_MOCK_DATA.request,
+  data,
 });

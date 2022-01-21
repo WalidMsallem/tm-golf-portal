@@ -1,4 +1,4 @@
-export const paginate = (list:[], currPage = 1, pageSize = 10, maxPages = 10) => {
+const paginate = (list: any[], currPage = 1, pageSize = 10, maxPages = 10) => {
   const totalItems = list.length;
   let currentPage = currPage;
   // calculate total pages
@@ -59,3 +59,5 @@ export const paginate = (list:[], currPage = 1, pageSize = 10, maxPages = 10) =>
     results,
   };
 };
+
+export default paginate;
