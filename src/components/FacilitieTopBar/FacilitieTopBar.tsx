@@ -1,11 +1,6 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import React from 'react'; 
+import Box from '@mui/material/Box'; 
 import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
 import { makeStyles } from '@mui/styles';
 
 import FacilitiesFilter from '../shared/FacilitiesFilter';
