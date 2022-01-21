@@ -3,13 +3,11 @@ import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
 import { makeStyles } from '@mui/styles';
-import { useLocation, useSearchParams } from 'react-router-dom';
 import FacilitiesCard from '../../components/shared/FacilitiesCard';
 import CardSkeleton from '../../components/shared/CardSkeleton';
-import { parseSearchUrl } from '../../utils/string.utils';
 import { loadMockDataRequest, getFacilitiesRequest } from '../../features/facilities/facilities.actions';
 import { loadingSelector, facilitiesSelector } from '../../features/facilities/facilities.selectors';
-
+import useQueries from '../../utils/useQueries.hooks';
 import {
   load as loadFromLocalStorage,
   encryptAndSave as encryptAndSaveInLocalStorage,
@@ -27,17 +25,14 @@ const useStyles = makeStyles({
 const FacilitiesManagement = () => {
   const classes = useStyles();
 
-  const location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [setQueries, getQueryByKey] = useQueries();
 
-  const urlQueries = parseSearchUrl(location.search);
+  const page = getQueryByKey('page') || '1';
 
   const loading = useSelector(loadingSelector);
   const facilities = useSelector(facilitiesSelector);
 
   const dispatch = useDispatch();
-
-  const page: string = searchParams.get('page') || '1';
 
   const isDummyDataLoaded = loadFromLocalStorage(IS_DUMMY_DATA_LOADED_KEY, false);
 
@@ -50,7 +45,7 @@ const FacilitiesManagement = () => {
   }, [page]);
 
   const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
-    setSearchParams({ ...urlQueries, page: value });
+    setQueries({ page: value });
   };
 
   const renderContent = () => {
