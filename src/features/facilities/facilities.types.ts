@@ -48,7 +48,6 @@ export interface ErrorsState {
 export interface LocalState {
   loading: LoadingState;
   errors: ErrorsState;
-  isDummyDataLoaded: boolean;
 }
 export interface FacilitiesState {
   data: DataState;

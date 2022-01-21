@@ -1,0 +1,2 @@
+export const IS_DUMMY_DATA_LOADED_KEY = 'IS_DUMMY_DATA_LOADED';
+export const MODEL_NAME = 'FACILITIES';

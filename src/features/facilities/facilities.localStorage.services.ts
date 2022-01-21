@@ -3,9 +3,8 @@ import { Facilitie, FacilitiesList } from './facilities.types';
 import { load, encryptAndSave } from '../../utils/localStorage.utils';
 import { initialState as facilitiesInitialState } from './facilities.reducer';
 import paginate from '../../utils/pagination.utils';
-import { paramsToObject } from '../../utils/string.utils';
-
-const MODEL_NAME = 'FACILITIES';
+import { parseSearchUrl } from '../../utils/string.utils';
+import { MODEL_NAME } from '../../constants/global.constants';
 
 const handleError = (e: any) => {
   throw e;
@@ -28,11 +27,12 @@ export const createFacilitie = (body: Facilitie): Facilitie | void => {
 
 export const queryFacilities = (queries: string): FacilitiesList | void => {
   try {
-    const { page: current } = paramsToObject(queries);
+    const { page: current } = parseSearchUrl(queries);
 
     const initialState = facilitiesInitialState.data.facilities.results;
+
     const facilities = load(MODEL_NAME, initialState);
-    console.log('wwwww', typeof facilities);
+
     const {
       totalItems: totalResults,
       currentPage: page,

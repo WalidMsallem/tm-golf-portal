@@ -1,31 +1,57 @@
 import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
+import Pagination from '@mui/material/Pagination';
+import { makeStyles } from '@mui/styles';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import FacilitiesCard from '../../components/shared/FacilitiesCard';
 import CardSkeleton from '../../components/shared/CardSkeleton';
+import { parseSearchUrl } from '../../utils/string.utils';
 import { loadMockDataRequest, getFacilitiesRequest } from '../../features/facilities/facilities.actions';
-import {
-  isDummyDataLoadedSelector,
-  loadingSelector,
-  facilitiesSelector,
-} from '../../features/facilities/facilities.selectors';
+import { loadingSelector, facilitiesSelector } from '../../features/facilities/facilities.selectors';
 
-import data from '../../MOCK_DATA/facilities.json';
+import {
+  load as loadFromLocalStorage,
+  encryptAndSave as encryptAndSaveInLocalStorage,
+} from '../../utils/localStorage.utils';
+
+import data from '../../constants/MOCK_DATA.json';
+import { IS_DUMMY_DATA_LOADED_KEY } from '../../constants/global.constants';
+
+const useStyles = makeStyles({
+  pagination: {
+    margin: '15px 10px',
+  },
+});
 
 const FacilitiesManagement = () => {
-  const isDummyDataLoaded = useSelector(isDummyDataLoadedSelector);
+  const classes = useStyles();
+
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const urlQueries = parseSearchUrl(location.search);
+
   const loading = useSelector(loadingSelector);
   const facilities = useSelector(facilitiesSelector);
 
   const dispatch = useDispatch();
 
+  const page: string = searchParams.get('page') || '1';
+
+  const isDummyDataLoaded = loadFromLocalStorage(IS_DUMMY_DATA_LOADED_KEY, false);
+
   useEffect(() => {
-    if (isDummyDataLoaded) {
-      dispatch(getFacilitiesRequest('1'));
-    } else {
-      dispatch(loadMockDataRequest(data));
-    }
+    if (!isDummyDataLoaded) dispatch(loadMockDataRequest(data));
   }, []);
+
+  useEffect(() => {
+    if (isDummyDataLoaded) dispatch(getFacilitiesRequest(page));
+  }, [page]);
+
+  const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
+    setSearchParams({ ...urlQueries, page: value });
+  };
 
   const renderContent = () => {
     if (loading.fetchFacilities) {
@@ -35,13 +61,29 @@ const FacilitiesManagement = () => {
           return <CardSkeleton key={i} />;
         });
     }
-    return facilities.results.map((facilitieItem) => {
-      return (
-        <Grid container item wrap="wrap" sx={{ width: 'unset' }} key={facilitieItem.id}>
-          <FacilitiesCard facilitieItem={facilitieItem} />
+    return (
+      <>
+        <Grid container wrap="wrap">
+          {facilities.results.map((facilitieItem) => {
+            return (
+              <Grid item key={facilitieItem.id}>
+                <FacilitiesCard facilitieItem={facilitieItem} />
+              </Grid>
+            );
+          })}
         </Grid>
-      );
-    });
+        <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Pagination
+            count={10}
+            variant="outlined"
+            shape="rounded"
+            page={Number(page)}
+            className={classes.pagination}
+            onChange={handleChangePage}
+          />
+        </Grid>
+      </>
+    );
   };
 
   return (

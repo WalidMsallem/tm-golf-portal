@@ -50,6 +50,7 @@
     "no-console": "warn",
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
-    "no-undef": "off"
+    "no-undef": "off",
+    "prefer-template": "off"
   }
 }

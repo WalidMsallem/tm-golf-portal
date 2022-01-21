@@ -32,10 +32,9 @@ export const encryptAndSave = (key: string, value: unknown) => {
   }
 
   try {
-    const isStringOrBoolean = typeof value === 'string' || typeof value === 'boolean';
     const stringifyValue = JSON.stringify(value);
     const encryptedValue = encryption.encrypt(stringifyValue);
-    save(key, isStringOrBoolean ? `"${encryptedValue}"` : `${encryptedValue}`);
+    save(key, encryptedValue);
     return true;
   } catch (e) {
     return null;
@@ -53,8 +52,7 @@ export const load = (key: string, defaultValue: unknown): any => {
       encryptAndSave(key, defaultValue);
       return defaultValue;
     }
-    console.log('qq', JSON.parse(item));
-    return encryption.decrypt(JSON.parse(item)) || defaultValue;
+    return JSON.parse(encryption.decrypt(item)) || defaultValue;
   } catch (e) {
     // console.error(e);
     return null;

@@ -1,10 +1,6 @@
 import React, { ReactElement } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 
-export const paramsToObject = (url: string) => {
-  return JSON.parse(`{"${decodeURI(url).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"')}"}`);
-};
-
 export const hideLongText = (text: string, maxCharacters: number): ReactElement => {
   if (text.length <= maxCharacters) {
     return <span>{text} </span>;
@@ -15,3 +11,8 @@ export const hideLongText = (text: string, maxCharacters: number): ReactElement 
     </Tooltip>
   );
 };
+
+export const parseSearchUrl = (url: string) =>
+  JSON.parse(
+    '{"' + decodeURI(url).replace(/^[?]/, '').replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}'
+  );

@@ -13,8 +13,7 @@ import {
   load as loadFromLocalStorage,
   encryptAndSave as encryptAndSaveInLocalStorage,
 } from '../../utils/localStorage.utils';
-
-const IS_DUMMY_DATA_LOADED_KEY = 'IS_DUMMY_DATA_LOADED';
+import { IS_DUMMY_DATA_LOADED_KEY } from '../../constants/global.constants';
 
 // The initial state of the reducer
 export const initialState: FacilitiesState = {
@@ -45,7 +44,6 @@ export const initialState: FacilitiesState = {
       getFacilitieById: '',
       deleteFacilitieById: '',
     },
-    isDummyDataLoaded: loadFromLocalStorage(IS_DUMMY_DATA_LOADED_KEY, false) === true,
   },
 };
 
@@ -80,13 +78,10 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.data.facilities = action.facilitiesList;
         break;
       case LOAD_MOCK_DATA.success:
-        console.log('action.facilitiesList', action);
-
         draft.local.loading.fetchFacilities = false;
         draft.local.errors.fetchFacilities = '';
         draft.data.facilities = action.facilitiesList;
         encryptAndSaveInLocalStorage(IS_DUMMY_DATA_LOADED_KEY, true);
-        draft.local.isDummyDataLoaded = true;
         break;
       case GET_FACILITIES.failure:
       case LOAD_MOCK_DATA.failure:

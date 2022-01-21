@@ -7,14 +7,12 @@ import { AppState } from '../rootReducer';
 const getFacilitiesLoading = (state: AppState) => state.facilities.local.loading;
 const getFacilitiesErrors = (state: AppState) => state.facilities.local.errors;
 const getFacilitiesList = (state: AppState) => state.facilities.data.facilities;
-const getIsDummyDataLoaded = (state: AppState) => state.facilities.local.isDummyDataLoaded;
 
 // const getError = (state: AppState) => state.todo.error;
 
 export const facilitiesSelector = createSelector(getFacilitiesList, (facilities) => facilities);
 export const loadingSelector = createSelector(getFacilitiesLoading, (loading) => loading);
 export const errorsSelector = createSelector(getFacilitiesList, (errors) => errors);
-export const isDummyDataLoadedSelector = createSelector(getIsDummyDataLoaded, (isDummyDataLoaded) => isDummyDataLoaded);
 
 // export const getPendingSelector = createSelector(
 //   getPending,

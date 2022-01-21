@@ -30,7 +30,6 @@ export function* queryFacilities(action: GetFacilitiesRequest) {
 
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);
-
     yield delay(DELAY);
     const response: Facilitie[] = yield call(api.queryFacilities, queries);
 
@@ -111,7 +110,6 @@ export function* loadMockData(action: LoadMockDataRequest) {
   try {
     yield delay(DELAY);
     const response: Facilitie = yield call(api.loadMockData, action.data);
-    console.log('hello word', response);
     yield put({
       type: LOAD_MOCK_DATA.success,
       facilitiesList: response,
