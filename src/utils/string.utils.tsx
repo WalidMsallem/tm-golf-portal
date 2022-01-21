@@ -15,7 +15,6 @@ export const hideLongText = (text: string, maxCharacters: number): ReactElement 
 export const isEmptySting = (str: string) => typeof str === 'string' && str.length === 0;
 
 export const parseSearchUrl = (url: string) => {
-  console.log('url sss', isEmptySting(decodeURI(url).replace(/^[?]/, '')));
   return isEmptySting(decodeURI(url).replace(/^[?]/, ''))
     ? {}
     : JSON.parse(
