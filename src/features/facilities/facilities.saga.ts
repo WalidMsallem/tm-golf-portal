@@ -25,7 +25,8 @@ import { CALL_LOCAL_STORAGE_DELAY } from '../../constants/global.constants';
 
 export function* queryFacilities(action: GetFacilitiesRequest) {
   try {
-    const queries = new URLSearchParams({ page: action.page }).toString();
+    const queries = new URLSearchParams({ page: action.page, search: action.search, type: action.facilitietype }).toString();
+    console.log('walid here 11', queries);
 
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);

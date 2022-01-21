@@ -7,7 +7,7 @@ import {
   LOAD_MOCK_DATA,
 } from './facilities.actionTypes';
 
-export enum FacilitieType {
+export enum FacilitieTypes {
   range = 'range',
   indoor = 'indoor',
 }
@@ -64,6 +64,8 @@ export interface CreateFacilitieRequest {
 export interface GetFacilitiesRequest {
   type: typeof GET_FACILITIES.request;
   page: string;
+  search: string;
+  facilitietype: string;
 }
 
 export interface UpdateFacilitieRequest {

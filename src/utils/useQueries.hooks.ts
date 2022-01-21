@@ -4,10 +4,10 @@ import { parseSearchUrl } from './string.utils';
 export default function useQueries() {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-
+  console.log('location.search', location.search);
   const prevQueries = parseSearchUrl(location.search);
 
-  const getQueryByKey = (key: string): string | null => searchParams.get(key);
+  const getQueryByKey = (key: string, defaultValue: string): string => searchParams.get(key) || defaultValue;
 
   const setQueries = (addedQueries: object) => setSearchParams({ ...prevQueries, ...addedQueries });
 

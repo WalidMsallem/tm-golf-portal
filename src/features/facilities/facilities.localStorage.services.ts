@@ -3,8 +3,8 @@ import { Facilitie, FacilitiesList } from './facilities.types';
 import { load, encryptAndSave } from '../../utils/localStorage.utils';
 import { initialState as facilitiesInitialState } from './facilities.reducer';
 import paginate from '../../utils/pagination.utils';
-import { parseSearchUrl } from '../../utils/string.utils';
-import { MODEL_NAME } from '../../constants/global.constants';
+import { parseSearchUrl, isEmptySting } from '../../utils/string.utils';
+import { MODEL_NAME, regExpMatchAll } from '../../constants/global.constants';
 
 const handleError = (e: any) => {
   throw e;
@@ -27,11 +27,16 @@ export const createFacilitie = (body: Facilitie): Facilitie | void => {
 
 export const queryFacilities = (queries: string): FacilitiesList | void => {
   try {
-    const { page: current } = parseSearchUrl(queries);
+    const { page: current, search, type } = parseSearchUrl(queries);
 
     const initialState = facilitiesInitialState.data.facilities.results;
 
-    const facilities = load(MODEL_NAME, initialState);
+    let facilities: Facilitie[] = load(MODEL_NAME, initialState);
+
+    const searchRegExp = isEmptySting(search) ? regExpMatchAll : new RegExp(search, 'i');
+    const typeRegExp = isEmptySting(type) ? regExpMatchAll : new RegExp(type, 'i');
+
+    facilities = facilities.filter((facilitie) => searchRegExp.test(facilitie.name) && typeRegExp.test(facilitie.type));
 
     const {
       totalItems: totalResults,

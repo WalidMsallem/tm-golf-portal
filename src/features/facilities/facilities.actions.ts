@@ -16,9 +16,11 @@ import {
   LoadMockDataRequest,
 } from './facilities.types';
 
-export const getFacilitiesRequest = (page: string): GetFacilitiesRequest => ({
+export const getFacilitiesRequest = (page: string, search: string, facilitietype: string): GetFacilitiesRequest => ({
   type: GET_FACILITIES.request,
   page,
+  search,
+  facilitietype,
 });
 
 export const createFacilitieRequest = (body: Facilitie): CreateFacilitieRequest => ({
