@@ -52,11 +52,10 @@ const useStyles = makeStyles({
   },
 
   content: {
-    padding: '5px 20px',
+    padding: '5px 10px',
     fontSize: '15px',
     textAlign: 'center',
     color: '#414141',
-    minHeight: '250px',
   },
   footer: {
     padding: '20px',
@@ -76,6 +75,7 @@ type CustomModalPropsType = {
   loadingSubmitButton?: boolean;
   disabledSubmitButton?: boolean;
   textSubmitButton?: string;
+  contentMinHeight?: string;
 };
 export default function CustomModal({
   bgColorSubmitButton,
@@ -87,6 +87,7 @@ export default function CustomModal({
   loadingSubmitButton,
   disabledSubmitButton,
   textSubmitButton = 'Submit',
+  contentMinHeight,
 }: CustomModalPropsType) {
   const classes = useStyles();
 
@@ -103,7 +104,7 @@ export default function CustomModal({
           </Typography>
         </Grid>
         <Divider />
-        <Grid sx={{ mt: 2 }} className={classes.content}>
+        <Grid sx={{ mt: 2, minHeight: contentMinHeight || '250px' }} className={classes.content}>
           {children}
         </Grid>
         <Divider />

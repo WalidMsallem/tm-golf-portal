@@ -9,7 +9,7 @@ import {
   UpdateFacilityRequest,
   Facility,
   LoadMockDataRequest,
-  OpenCreateOrUpdateFacility,
+  OpenCreateOrUpdateModal,
 } from './facilities.types';
 import {
   GET_FACILITIES,
@@ -119,7 +119,7 @@ export function* loadMockData(action: LoadMockDataRequest) {
     yield put({ type: LOAD_MOCK_DATA.failure, e });
   }
 }
-export function* manageCreateOrUpdateFacility(action: OpenCreateOrUpdateFacility) {
+export function* manageCreateOrUpdateFacility(action: OpenCreateOrUpdateModal) {
   try {
     if (action.id) {
       yield put(getFacilityByIdRequest(action.id));

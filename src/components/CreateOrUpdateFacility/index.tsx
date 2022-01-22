@@ -128,7 +128,6 @@ export default function CreateOrUpdateFacility() {
           value={name}
           onChange={handleInputChange}
         />
-
         <RadioGroup
           row
           name="type"

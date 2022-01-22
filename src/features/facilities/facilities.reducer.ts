@@ -8,6 +8,7 @@ import {
   LOAD_MOCK_DATA,
   UPDATE_FACILITY,
   MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
+  MANAGE_DELETE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 import { FacilitiesActions, FacilitiesState, Facility, CreateOrUpdateModalStatus } from './facilities.types';
 import { handleErrorMessage } from '../../utils/reducer.utils';
@@ -55,13 +56,19 @@ export const initialState: FacilitiesState = {
     },
     modals: {
       openOrUpdateFacility: CreateOrUpdateModalStatus.close,
+      deleteFacility: false,
     },
+    selectedItemId: undefined,
   },
 };
 
 const facilitiesReducer = (state: FacilitiesState = initialState, action: FacilitiesActions): FacilitiesState =>
   produce(state, (draft) => {
     switch (action.type) {
+      case MANAGE_DELETE_FACILITY_MODAL:
+        draft.local.selectedItemId = action.itemId;
+        draft.local.modals.deleteFacility = action.toggleValue;
+        break;
       case MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL:
         draft.local.modals.openOrUpdateFacility = action.status;
         if (action.status === CreateOrUpdateModalStatus.close) {
@@ -171,7 +178,19 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
       case DELETE_FACILITY.success:
         draft.local.loading.deleteFacilityById = false;
         draft.local.errors.deleteFacilityById = '';
-        draft.data.facilities.results = state.data.facilities.results.filter((element) => element.id !== action.id);
+        draft.data.facilities.results = state.data.facilities.results.filter((element) => element.id !== action.data.id);
+        draft.local.selectedItemId = undefined;
+        draft.local.modals.deleteFacility = false;
+        console.log('action.data', action.data);
+        toast.success(`Facility ${action.data.name} was deleted`, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         break;
       case DELETE_FACILITY.failure:
         draft.local.loading.deleteFacilityById = false;

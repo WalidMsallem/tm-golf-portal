@@ -58,18 +58,25 @@ export interface ErrorsState {
 }
 export interface ModalsState {
   openOrUpdateFacility: string;
+  deleteFacility: boolean;
 }
 export interface LocalState {
   loading: LoadingState;
   errors: ErrorsState;
   modals: ModalsState;
+  selectedItemId: string | undefined;
 }
 export interface FacilitiesState {
   data: DataState;
   local: LocalState;
 }
 
-export interface OpenCreateOrUpdateFacility {
+export interface manageDeleteModal {
+  type: typeof MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL;
+  itemId?: string;
+  toggleValue: boolean;
+}
+export interface OpenCreateOrUpdateModal {
   type: typeof MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL;
   id?: string;
   status: string;
@@ -119,5 +126,6 @@ export type FacilitiesActions = CreateFacilitySuccess &
   GetFacilityByIdRequest &
   LoadMockDataRequest &
   getFacilitiesSuccess &
-  OpenCreateOrUpdateFacility &
-  LoadMockDataRequest;
+  OpenCreateOrUpdateModal &
+  LoadMockDataRequest &
+  manageDeleteModal;

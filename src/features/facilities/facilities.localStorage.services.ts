@@ -104,11 +104,11 @@ export const deleteFacilitie = (id: string): Facility | void => {
   try {
     const initialState = facilitiesInitialState.data.facilities.results;
     let facilities = load(MODEL_NAME, initialState);
-
+    const facility = getFacilityById(id);
     facilities = facilities.filter((element: Facility) => String(element.id) !== id);
     encryptAndSave(MODEL_NAME, facilities);
 
-    return facilities;
+    return facility;
   } catch (e) {
     handleError(e);
   }

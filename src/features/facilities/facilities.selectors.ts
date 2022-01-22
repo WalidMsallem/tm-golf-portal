@@ -9,6 +9,7 @@ const getFacilitiesErrors = (state: AppState) => state.facilities.local.errors;
 const getFacilitiesList = (state: AppState) => state.facilities.data.facilities;
 const getModalsState = (state: AppState) => state.facilities.local.modals;
 const getFacilitiy = (state: AppState) => state.facilities.data.facility;
+const getSelectedItemId = (state: AppState) => state.facilities.local.selectedItemId;
 
 // const getError = (state: AppState) => state.todo.error;
 
@@ -16,7 +17,8 @@ export const facilitiesSelector = createSelector(getFacilitiesList, (facilities)
 export const loadingSelector = createSelector(getFacilitiesLoading, (loading) => loading);
 export const errorsSelector = createSelector(getFacilitiesErrors, (errors) => errors);
 export const modalsStateSelector = createSelector(getModalsState, (modals) => modals);
-export const facilitiySelector = createSelector(getFacilitiy, (facilitiy) => facilitiy);
+export const selectedItemIdSelector = createSelector(getSelectedItemId, (ItemId) => ItemId);
+export const facilitiySelector = createSelector(getFacilitiy, (facility) => facility);
 
 // export const getPendingSelector = createSelector(
 //   getPending,

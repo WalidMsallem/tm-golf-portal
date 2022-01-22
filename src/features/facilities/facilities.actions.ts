@@ -6,6 +6,7 @@ import {
   GET_FACILITY_BY_ID,
   LOAD_MOCK_DATA,
   MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
+  MANAGE_DELETE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 import {
   GetFacilitiesRequest,
@@ -15,11 +16,18 @@ import {
   GetFacilityByIdRequest,
   Facility,
   LoadMockDataRequest,
-  OpenCreateOrUpdateFacility,
+  OpenCreateOrUpdateModal,
   FacilityPayload,
+  manageDeleteModal,
 } from './facilities.types';
 
-export const manageCreateOrUpdateFacility = (status: string, id?: string): OpenCreateOrUpdateFacility => ({
+export const manageDeleteFacility = (toggleValue: boolean, itemId?: string): manageDeleteModal => ({
+  type: MANAGE_DELETE_FACILITY_MODAL,
+  itemId,
+  toggleValue,
+});
+
+export const manageCreateOrUpdateFacility = (status: string, id?: string): OpenCreateOrUpdateModal => ({
   type: MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
   id,
   status,
