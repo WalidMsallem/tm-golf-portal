@@ -1,6 +1,7 @@
-import React from 'react'; 
-import Box from '@mui/material/Box'; 
+import React from 'react';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
 
 import FacilitiesFilter from '../shared/FacilitiesFilter';
@@ -25,7 +26,9 @@ export default function FacilitieTopBar() {
         <FacilitiesFilter />
       </Grid>
 
-      <Box sx={{ flexGrow: 0 }}>BOTTON ADD</Box>
+      <Box sx={{ flexGrow: 0 }}>
+        <Button variant="outlined">Create</Button>
+      </Box>
     </Grid>
   );
 }
