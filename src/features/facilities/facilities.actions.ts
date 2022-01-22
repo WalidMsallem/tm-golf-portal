@@ -18,10 +18,10 @@ import {
   LoadMockDataRequest,
   OpenCreateOrUpdateModal,
   FacilityPayload,
-  manageDeleteModal,
+  ManageDeleteModal,
 } from './facilities.types';
 
-export const manageDeleteFacility = (toggleValue: boolean, itemId?: string): manageDeleteModal => ({
+export const manageDeleteFacility = (toggleValue: boolean, itemId?: string): ManageDeleteModal => ({
   type: MANAGE_DELETE_FACILITY_MODAL,
   itemId,
   toggleValue,

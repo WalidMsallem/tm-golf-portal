@@ -71,7 +71,7 @@ export interface FacilitiesState {
   local: LocalState;
 }
 
-export interface manageDeleteModal {
+export interface ManageDeleteModal {
   type: typeof MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL;
   itemId?: string;
   toggleValue: boolean;
@@ -128,4 +128,4 @@ export type FacilitiesActions = CreateFacilitySuccess &
   getFacilitiesSuccess &
   OpenCreateOrUpdateModal &
   LoadMockDataRequest &
-  manageDeleteModal;
+  ManageDeleteModal;

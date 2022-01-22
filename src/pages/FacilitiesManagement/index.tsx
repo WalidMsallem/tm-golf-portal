@@ -2,40 +2,29 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '@mui/material/Pagination';
-import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 
 import FacilitieTopBar from '../../components/FacilitieTopBar';
 import EmptyData from '../../components/shared/EmptyData';
 import CreateOrUpdateFacility from '../../components/CreateOrUpdateFacility';
 import DeleteFacility from '../../components/DeleteFacility';
 
-import FacilitiesCard from '../../components/shared/FacilitiesCard';
+import FacilitiesCard from '../../components/shared/FacilityCard';
 import CardSkeleton from '../../components/shared/CardSkeleton';
 import { loadMockDataRequest, getFacilitiesRequest } from '../../features/facilities/facilities.actions';
 import { loadingSelector, facilitiesSelector } from '../../features/facilities/facilities.selectors';
 import useQueries from '../../utils/useQueries.hooks';
 import { load as loadFromLocalStorage } from '../../utils/localStorage.utils';
+import { useStyles } from './styles';
 
 import data from '../../constants/MOCK_DATA.json';
 import { IS_DUMMY_DATA_LOADED_KEY } from '../../constants/global.constants';
 
-const useStyles = makeStyles({
-  pagination: {
-    margin: '15px 10px',
-  },
-  paginationContainer: {
-    margin: '15px 10px',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  list: {
-    minHeight: '60vh',
-  },
-});
+const componentPrefix = 'FACILITIES_MANAGEMENT.';
 
 const FacilitiesManagement = () => {
   const classes = useStyles();
-
+  const { t } = useTranslation();
   const [setQueries, getQueryByKey] = useQueries();
 
   const page = getQueryByKey('page', '1');
@@ -64,7 +53,7 @@ const FacilitiesManagement = () => {
   const renderFacililitiesList = () => {
     const skeletonData = Array(10).fill(0);
     if (!loading.fetchFacilities && facilities.results.length < 1) {
-      return <EmptyData message="There is no data available, please change the search criteria." iconSize="120px" />;
+      return <EmptyData message={t(`${componentPrefix}emptyDataText`)} iconSize="120px" />;
     }
     if (loading.fetchFacilities) {
       return (
@@ -91,7 +80,6 @@ const FacilitiesManagement = () => {
   return (
     <Grid container spacing={1}>
       <Grid container sx={{ marginX: 5 }}>
-        {/* <FacilitiesFilter /> */}
         <FacilitieTopBar />
         {renderFacililitiesList()}
         <Grid container className={classes.paginationContainer}>

@@ -51,6 +51,8 @@
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
     "no-undef": "off",
-    "prefer-template": "off"
+    "prefer-template": "off",
+    "import/prefer-default-export": "off",
+    "prefer-const": "off"
   }
 }

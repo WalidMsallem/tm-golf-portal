@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Grid from '@mui/material/Grid';
@@ -10,6 +9,7 @@ import Collapse from '@mui/material/Collapse';
 import { useSelector, useDispatch } from 'react-redux';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useTranslation } from 'react-i18next';
 
 import { FacilityTypes, CreateOrUpdateModalStatus } from '../../features/facilities/facilities.types';
 import {
@@ -25,45 +25,9 @@ import {
   facilitiySelector,
   errorsSelector,
 } from '../../features/facilities/facilities.selectors';
+import { useStyles } from './styles';
 
-const useStyles = makeStyles({
-  root: {
-    padding: '10px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    minHeight: '400px ',
-  },
-  input: {
-    width: '100%',
-    marginBottom: '30px !important',
-  },
-  radioGroup: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '30px !important',
-    width: '100%',
-  },
-  radio: {
-    border: '1px solid #E0E0E0',
-    borderRadius: '4px',
-    padding: '12px 10px',
-    width: '45%',
-    margin: 'unset !important',
-  },
-  error: {
-    width: '100%',
-  },
-  collapseError: {
-    width: '100%',
-    padding: 0,
-  },
-  dackdrop: {
-    color: '#fff',
-    zIndex: 1,
-  },
-});
+const componentPrefix = 'CREATE_OR_UPDATE_FACILITY.';
 
 export default function CreateOrUpdateFacility() {
   const loading = useSelector(loadingSelector);
@@ -72,6 +36,7 @@ export default function CreateOrUpdateFacility() {
   const facilitiy = useSelector(facilitiySelector);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     name: facilitiy.name,
@@ -91,7 +56,10 @@ export default function CreateOrUpdateFacility() {
   const modalState = modalsState.openOrUpdateFacility;
   const isOpen = modalState === CreateOrUpdateModalStatus.update || modalState === CreateOrUpdateModalStatus.create;
   const loadingSubmitButton = loading.createFacility || loading.updateFacility;
-  const modalTitle = modalState === CreateOrUpdateModalStatus.update ? 'Edit information' : 'Create new Facility';
+  const modalTitle =
+    modalState === CreateOrUpdateModalStatus.update
+      ? t(`${componentPrefix}modalTitle/editFacility`)
+      : t(`${componentPrefix}modalTitle/createFacility`);
   const errorMessage = errors.createFacility || errors.updateFacility;
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -121,7 +89,7 @@ export default function CreateOrUpdateFacility() {
     return (
       <Grid container className={classes.root}>
         <TextField
-          label="Facility name"
+          label={t(`${componentPrefix}label/input/facilityName`)}
           variant="standard"
           className={classes.input}
           name="name"
@@ -139,7 +107,7 @@ export default function CreateOrUpdateFacility() {
             defaultChecked
             value={FacilityTypes.indoor}
             control={<Radio />}
-            label="Indoor"
+            label={`${t(`${componentPrefix}label/radio/indoor`)}`}
             className={classes.radio}
             checked={type === FacilityTypes.indoor}
           />
@@ -147,14 +115,14 @@ export default function CreateOrUpdateFacility() {
             defaultChecked
             value={FacilityTypes.range}
             control={<Radio />}
-            label="Range"
+            label={`${t(`${componentPrefix}label/radio/range`)}`}
             className={classes.radio}
             checked={type === FacilityTypes.range}
           />
         </RadioGroup>
 
         <TextField
-          label="Address"
+          label={t(`${componentPrefix}label/input/address`)}
           variant="standard"
           className={classes.input}
           name="address"
@@ -178,7 +146,7 @@ export default function CreateOrUpdateFacility() {
       loadingSubmitButton={loadingSubmitButton}
       // disabledSubmitButton
       handleSubmit={handleSubmit}
-      textSubmitButton="Save change"
+      textSubmitButton={t(`${componentPrefix}button/saveChange`)}
     >
       {renderContent()}
     </CustomModal>

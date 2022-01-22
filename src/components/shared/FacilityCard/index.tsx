@@ -3,70 +3,33 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Tooltip from '@mui/material/Tooltip';
+
 import { hideLongText } from '../../../utils/string.utils';
 import { Facility, CreateOrUpdateModalStatus } from '../../../features/facilities/facilities.types';
 import { manageCreateOrUpdateFacility, manageDeleteFacility } from '../../../features/facilities/facilities.actions';
-
-const useStyles = makeStyles({
-  root: {
-    boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
-    borderRadius: 4,
-    maxHeight: 152,
-    margin: '15px',
-    padding: '15px 25px !important',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  actions: {
-    display: 'flex',
-    padding: '0 !important',
-    alignItems: 'flex-start !important',
-  },
-  content: {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexDirection: 'column',
-    padding: '10px 0 !important',
-  },
-  title: {
-    fontWeight: 500,
-    letterSpacing: '0.8px',
-    fontSize: 25,
-  },
-  subTitle: {
-    textTransform: 'uppercase',
-    fontWight: 'bold',
-    fontSize: 15,
-    color: '#EC691A',
-  },
-  description: {
-    fontSize: 15,
-    color: '#A0A0A0',
-  },
-  textMenuItem: {
-    marginLeft: '5px !important',
-  },
-});
+import { useStyles, StyledMenu } from './styles';
 
 type FacilitiesCardProps = {
   facilitieItem: Facility;
 };
+
+const componentPrefix = 'FACILITY_CARD.';
 
 function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const open = Boolean(anchorEl);
 
@@ -101,21 +64,13 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
             aria-expanded={open ? 'true' : undefined}
             aria-haspopup="true"
             onClick={handleClick}
+            className={classes.menuButton}
           >
             <MoreVertIcon />
           </IconButton>
         </Tooltip>
 
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleCloseMenu}
-          PaperProps={{
-            style: {
-              width: '10ch',
-            },
-          }}
-        >
+        <StyledMenu anchorEl={anchorEl} open={open} onClose={handleCloseMenu}>
           <MenuItem
             key={1}
             onClick={() => {
@@ -125,7 +80,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
           >
             <SettingsIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
-              Edit
+              {t(`${componentPrefix}menu/edit`)}
             </Typography>
           </MenuItem>
           <MenuItem
@@ -137,10 +92,10 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
           >
             <DeleteOutlinedIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
-              Delete
+              {t(`${componentPrefix}menu/delete`)}
             </Typography>
           </MenuItem>
-        </Menu>
+        </StyledMenu>
       </CardActions>
     </Card>
   );

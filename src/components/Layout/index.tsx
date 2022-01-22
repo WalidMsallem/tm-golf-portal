@@ -2,19 +2,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
 import { ToastContainer, toast } from 'react-toastify';
-import Header from '../Header';
 
-const useStyles = makeStyles({
-  root: {
-    background: '#f1f3f4',
-    minHeight: '100vh',
-  },
-  content: {
-    margin: '0 10px',
-  },
-});
+import Header from '../Header';
+import { useStyles } from './styles';
 
 type LayoutProps = {
   children: JSX.Element | JSX.Element[];

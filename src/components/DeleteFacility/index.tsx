@@ -6,6 +6,7 @@ import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import { manageDeleteFacility, deleteFacilitieRequest } from '../../features/facilities/facilities.actions';
 import CustomModal from '../shared/CustomModal';
@@ -16,24 +17,9 @@ import {
   selectedItemIdSelector,
   errorsSelector,
 } from '../../features/facilities/facilities.selectors';
+import { useStyles } from './styles';
 
-const useStyles = makeStyles({
-  root: {
-    padding: '10px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    minHeight: '20px ',
-  },
-  error: {
-    width: '100%',
-  },
-  collapseError: {
-    width: '100%',
-    padding: 0,
-  },
-});
+const componentPrefix = 'DELETE_FACILITY.';
 
 export default function DeleteFacility() {
   const loading = useSelector(loadingSelector);
@@ -42,12 +28,11 @@ export default function DeleteFacility() {
   const itemId = useSelector(selectedItemIdSelector);
   const classes = useStyles();
   const dispatch = useDispatch();
-
-  console.log('itemId', itemId);
+  const { t } = useTranslation();
 
   const isOpen = modalsState.deleteFacility;
   const loadingSubmitButton = loading.deleteFacilityById;
-  const modalTitle = 'Delete Facility';
+  const modalTitle = t(`${componentPrefix}modalTitle/deleteFacility`);
   const errorMessage = errors.createFacility || errors.updateFacility;
 
   const handleCloseModal = (): void => {
@@ -67,13 +52,13 @@ export default function DeleteFacility() {
       loadingSubmitButton={loadingSubmitButton}
       // disabledSubmitButton
       handleSubmit={handleSubmit}
-      textSubmitButton="Delete"
+      textSubmitButton={t(`${componentPrefix}button/delete`)}
       contentMinHeight="100px"
       bgColorSubmitButton="#EE1B34"
     >
       <Grid container className={classes.root}>
-        <Typography>Are you sure you want to delete this facility?</Typography>
-        <Typography> You won’t be able to recover this data.</Typography>
+        <Typography>{t(`${componentPrefix}warning/part1`)}</Typography>
+        <Typography>{t(`${componentPrefix}warning/part2`)}</Typography>
 
         <Collapse in={!isEmptySting(errorMessage)} className={classes.collapseError}>
           <Alert className={classes.error} severity="error">
