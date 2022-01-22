@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { makeStyles } from '@mui/styles';
 
-import { FacilitieTypes } from '../../../features/facilities/facilities.types';
+import { FacilityTypes } from '../../../features/facilities/facilities.types';
 import useQueries from '../../../utils/useQueries.hooks';
 import useDebounce from '../../../utils/useDebounce.hooks';
 
@@ -57,11 +57,14 @@ export default function FacilitiesFilter() {
         <FormControl fullWidth>
           <InputLabel>type</InputLabel>
           <Select value={type} label="Type" onChange={handleChangeType}>
-            {Object.values(FacilitieTypes).map((facilitieType) => (
-              <MenuItem value={facilitieType} key={facilitieType}>
-                {facilitieType}
+            {Object.values(FacilityTypes).map((facilityType) => (
+              <MenuItem value={facilityType} key={facilityType}>
+                {facilityType}
               </MenuItem>
             ))}
+            <MenuItem value="" key="default">
+              All
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>

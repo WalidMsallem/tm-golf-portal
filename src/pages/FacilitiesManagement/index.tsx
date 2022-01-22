@@ -6,7 +6,7 @@ import { makeStyles } from '@mui/styles';
 
 import FacilitieTopBar from '../../components/FacilitieTopBar';
 import EmptyData from '../../components/shared/EmptyData';
-import FacilitiesFilter from '../../components/shared/FacilitiesFilter';
+import CreateOrUpdateFacility from '../../components/CreateOrUpdateFacility';
 import FacilitiesCard from '../../components/shared/FacilitiesCard';
 import CardSkeleton from '../../components/shared/CardSkeleton';
 import { loadMockDataRequest, getFacilitiesRequest } from '../../features/facilities/facilities.actions';
@@ -103,6 +103,7 @@ const FacilitiesManagement = () => {
           />
         </Grid>
       </Grid>
+      <CreateOrUpdateFacility />
     </Grid>
   );
 };

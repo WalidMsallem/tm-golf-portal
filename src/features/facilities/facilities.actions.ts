@@ -1,48 +1,56 @@
 import {
-  CREATE_FACILITIE,
+  CREATE_FACILITY,
   GET_FACILITIES,
-  UPDATE_FACILITIE,
-  DELETE_FACILITIE,
-  GET_FACILITIE_BY_ID,
+  UPDATE_FACILITY,
+  DELETE_FACILITY,
+  GET_FACILITY_BY_ID,
   LOAD_MOCK_DATA,
+  MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 import {
   GetFacilitiesRequest,
-  CreateFacilitieRequest,
-  UpdateFacilitieRequest,
+  CreateFacilityRequest,
+  UpdateFacilityRequest,
   DeleteFacilitieRequest,
-  GetFacilitieByIdRequest,
-  Facilitie,
+  GetFacilityByIdRequest,
+  Facility,
   LoadMockDataRequest,
+  OpenCreateOrUpdateFacility,
+  FacilityPayload,
 } from './facilities.types';
 
-export const getFacilitiesRequest = (page: string, search: string, facilitietype: string): GetFacilitiesRequest => ({
+export const manageCreateOrUpdateFacility = (status: string, id?: string): OpenCreateOrUpdateFacility => ({
+  type: MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
+  id,
+  status,
+});
+export const getFacilitiesRequest = (page: string, search: string, facilityType: string): GetFacilitiesRequest => ({
   type: GET_FACILITIES.request,
   page,
   search,
-  facilitietype,
+  facilityType,
 });
 
-export const createFacilitieRequest = (body: Facilitie): CreateFacilitieRequest => ({
-  type: CREATE_FACILITIE.request,
+export const createFacilityRequest = (body: FacilityPayload): CreateFacilityRequest => ({
+  type: CREATE_FACILITY.request,
   body,
 });
 
-export const updateFacilitieRequest = (id: string, body: Facilitie): UpdateFacilitieRequest => ({
-  type: UPDATE_FACILITIE.request,
+export const updateFacilityRequest = (id: string, body: Facility): UpdateFacilityRequest => ({
+  type: UPDATE_FACILITY.request,
   body,
   id,
 });
 
 export const deleteFacilitieRequest = (id: string): DeleteFacilitieRequest => ({
-  type: DELETE_FACILITIE.request,
+  type: DELETE_FACILITY.request,
   id,
 });
-export const getFacilitieByIdRequest = (id: string): GetFacilitieByIdRequest => ({
-  type: GET_FACILITIE_BY_ID.request,
+export const getFacilityByIdRequest = (id: string): GetFacilityByIdRequest => ({
+  type: GET_FACILITY_BY_ID.request,
   id,
 });
-export const loadMockDataRequest = (data: Facilitie[]): LoadMockDataRequest => ({
+export const loadMockDataRequest = (data: Facility[]): LoadMockDataRequest => ({
   type: LOAD_MOCK_DATA.request,
   data,
 });

@@ -6,13 +6,15 @@ import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
+import { useDispatch } from 'react-redux';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Tooltip from '@mui/material/Tooltip';
 import { hideLongText } from '../../../utils/string.utils';
-import { Facilitie } from '../../../features/facilities/facilities.types';
+import { Facility, CreateOrUpdateModalStatus } from '../../../features/facilities/facilities.types';
+import { manageCreateOrUpdateFacility } from '../../../features/facilities/facilities.actions';
 
 const useStyles = makeStyles({
   root: {
@@ -57,21 +59,25 @@ const useStyles = makeStyles({
 });
 
 type FacilitiesCardProps = {
-  facilitieItem: Facilitie;
+  facilitieItem: Facility;
 };
 
 function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
-  const { name, type, address } = facilitieItem;
-  const classes = useStyles();
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
+
+  const { name, type, address, id } = facilitieItem;
 
   return (
     <Card sx={{ width: 275 }} className={classes.root}>
@@ -91,7 +97,6 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
         <Tooltip title="setting" placement="top">
           <IconButton
             aria-label="more"
-            id="long-button"
             aria-controls={open ? 'long-menu' : undefined}
             aria-expanded={open ? 'true' : undefined}
             aria-haspopup="true"
@@ -102,26 +107,34 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
         </Tooltip>
 
         <Menu
-          id="long-menu"
-          MenuListProps={{
-            'aria-labelledby': 'long-button',
-          }}
           anchorEl={anchorEl}
           open={open}
-          onClose={handleClose}
+          onClose={handleCloseMenu}
           PaperProps={{
             style: {
               width: '10ch',
             },
           }}
         >
-          <MenuItem key={1}>
+          <MenuItem
+            key={1}
+            onClick={() => {
+              handleCloseMenu();
+              dispatch(manageCreateOrUpdateFacility(CreateOrUpdateModalStatus.update, String(id)));
+            }}
+          >
             <SettingsIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
               Edit
             </Typography>
           </MenuItem>
-          <MenuItem key={2}>
+          <MenuItem
+            key={2}
+            onClick={() => {
+              handleCloseMenu();
+              // dispatch(manageCreateOrUpdateFacility(CreateOrUpdateModalStatus.update, String(id)));
+            }}
+          >
             <DeleteOutlinedIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
               Delete

@@ -1,26 +1,37 @@
 import {
-  CREATE_FACILITIE,
+  CREATE_FACILITY,
   GET_FACILITIES,
-  UPDATE_FACILITIE,
-  DELETE_FACILITIE,
-  GET_FACILITIE_BY_ID,
+  UPDATE_FACILITY,
+  DELETE_FACILITY,
+  GET_FACILITY_BY_ID,
   LOAD_MOCK_DATA,
+  MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 
-export enum FacilitieTypes {
+export enum FacilityTypes {
   range = 'range',
   indoor = 'indoor',
 }
-export interface Facilitie {
+export enum CreateOrUpdateModalStatus {
+  close = 'close',
+  update = 'update',
+  create = 'create',
+}
+export interface Facility {
   id: string | number;
   createdAt: string;
   name: string;
   type: string;
   address: string;
 }
+export interface FacilityPayload {
+  name: string;
+  type: string;
+  address: string;
+}
 
 export interface FacilitiesList {
-  results: Facilitie[];
+  results: Facility[];
   page: number;
   limit: number;
   totalPages: number;
@@ -29,72 +40,84 @@ export interface FacilitiesList {
 
 export interface DataState {
   facilities: FacilitiesList;
-  facilitie: Facilitie | object;
+  facility: Facility;
 }
 export interface LoadingState {
   fetchFacilities: boolean;
-  createFacilitie: boolean;
-  updateFacilitie: boolean;
-  getFacilitieById: boolean;
-  deleteFacilitieById: boolean;
+  createFacility: boolean;
+  updateFacility: boolean;
+  getFacilityById: boolean;
+  deleteFacilityById: boolean;
 }
 export interface ErrorsState {
   fetchFacilities: string;
-  createFacilitie: string;
-  updateFacilitie: string;
-  getFacilitieById: string;
-  deleteFacilitieById: string;
+  createFacility: string;
+  updateFacility: string;
+  getFacilityById: string;
+  deleteFacilityById: string;
+}
+export interface ModalsState {
+  openOrUpdateFacility: string;
 }
 export interface LocalState {
   loading: LoadingState;
   errors: ErrorsState;
+  modals: ModalsState;
 }
 export interface FacilitiesState {
   data: DataState;
   local: LocalState;
 }
+
+export interface OpenCreateOrUpdateFacility {
+  type: typeof MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL;
+  id?: string;
+  status: string;
+}
 export interface LoadMockDataRequest {
   type: typeof LOAD_MOCK_DATA.request;
-  data: Facilitie[];
+  data: Facility[];
 }
-export interface CreateFacilitieRequest {
-  type: typeof CREATE_FACILITIE.request;
-  body: Facilitie;
+export interface CreateFacilityRequest {
+  type: typeof CREATE_FACILITY.request;
+  body: FacilityPayload;
 }
 export interface GetFacilitiesRequest {
   type: typeof GET_FACILITIES.request;
   page: string;
   search: string;
-  facilitietype: string;
+  facilityType: string;
 }
 
-export interface UpdateFacilitieRequest {
-  type: typeof UPDATE_FACILITIE.request;
+export interface UpdateFacilityRequest {
+  type: typeof UPDATE_FACILITY.request;
   id: string;
-  body: Facilitie;
+  body: Facility;
 }
 export interface DeleteFacilitieRequest {
-  type: typeof DELETE_FACILITIE.request;
+  type: typeof DELETE_FACILITY.request;
   id: string;
 }
-export interface GetFacilitieByIdRequest {
-  type: typeof GET_FACILITIE_BY_ID.request;
+export interface GetFacilityByIdRequest {
+  type: typeof GET_FACILITY_BY_ID.request;
   id: string;
 }
 export interface getFacilitiesSuccess {
-  type: typeof CREATE_FACILITIE.success;
+  type: typeof CREATE_FACILITY.success;
   facilitiesList: FacilitiesList;
 }
-export interface CreateFacilitieSuccess {
-  type: typeof CREATE_FACILITIE.success;
-  data: Facilitie;
+export interface CreateFacilitySuccess {
+  type: typeof CREATE_FACILITY.success;
+  data: Facility;
 }
 
-export type FacilitiesActions = CreateFacilitieSuccess &
-  CreateFacilitieRequest &
+export type FacilitiesActions = CreateFacilitySuccess &
+  CreateFacilityRequest &
   GetFacilitiesRequest &
-  UpdateFacilitieRequest &
+  UpdateFacilityRequest &
   DeleteFacilitieRequest &
-  GetFacilitieByIdRequest &
+  GetFacilityByIdRequest &
   LoadMockDataRequest &
-  getFacilitiesSuccess;
+  getFacilitiesSuccess &
+  OpenCreateOrUpdateFacility &
+  LoadMockDataRequest;
