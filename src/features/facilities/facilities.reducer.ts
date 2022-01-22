@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { toast } from 'react-toastify';
 import {
   CREATE_FACILITY,
   DELETE_FACILITY,
@@ -6,9 +7,9 @@ import {
   GET_FACILITY_BY_ID,
   LOAD_MOCK_DATA,
   UPDATE_FACILITY,
-  OPEN_CREATE_OR_UPDATE_FACILITY_MODAL,
+  MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
 } from './facilities.actionTypes';
-import { FacilitiesActions, FacilitiesState, CreateOrUpdateModalStatus } from './facilities.types';
+import { FacilitiesActions, FacilitiesState, Facility, CreateOrUpdateModalStatus } from './facilities.types';
 import { handleErrorMessage } from '../../utils/reducer.utils';
 import {
   load as loadFromLocalStorage,
@@ -16,6 +17,13 @@ import {
 } from '../../utils/localStorage.utils';
 import { IS_DUMMY_DATA_LOADED_KEY } from '../../constants/global.constants';
 
+const facilityInitialState: Facility = {
+  id: '',
+  createdAt: '',
+  name: '',
+  type: '',
+  address: '',
+};
 // The initial state of the reducer
 export const initialState: FacilitiesState = {
   // For external data
@@ -27,13 +35,7 @@ export const initialState: FacilitiesState = {
       results: [],
       totalResults: 0,
     },
-    facility: {
-      id: '',
-      createdAt: '',
-      name: '',
-      type: '',
-      address: '',
-    },
+    facility: facilityInitialState,
   },
   // For local data
   local: {
@@ -60,8 +62,11 @@ export const initialState: FacilitiesState = {
 const facilitiesReducer = (state: FacilitiesState = initialState, action: FacilitiesActions): FacilitiesState =>
   produce(state, (draft) => {
     switch (action.type) {
-      case OPEN_CREATE_OR_UPDATE_FACILITY_MODAL:
+      case MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL:
         draft.local.modals.openOrUpdateFacility = action.status;
+        if (action.status === CreateOrUpdateModalStatus.close) {
+          draft.data.facility = facilityInitialState;
+        }
         break;
       // create Facility
       case CREATE_FACILITY.request:
@@ -72,6 +77,16 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.local.loading.createFacility = false;
         draft.local.errors.createFacility = '';
         draft.data.facilities.results.unshift(action.data);
+        draft.local.modals.openOrUpdateFacility = CreateOrUpdateModalStatus.close;
+        toast.success(`Facility created`, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         break;
       case CREATE_FACILITY.failure:
         draft.local.loading.createFacility = false;
@@ -132,12 +147,21 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
           }
           return element;
         });
+        draft.local.modals.openOrUpdateFacility = CreateOrUpdateModalStatus.close;
+        draft.data.facility = facilityInitialState;
+        toast.success(`Facility updated`, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         break;
       case UPDATE_FACILITY.failure:
         draft.local.loading.updateFacility = false;
-
         draft.local.errors.updateFacility = handleErrorMessage(action);
-
         break;
       // delete Facility by Id
       case DELETE_FACILITY.request:

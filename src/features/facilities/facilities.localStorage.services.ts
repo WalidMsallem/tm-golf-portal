@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Facility, FacilitiesList } from './facilities.types';
+import { Facility, FacilitiesList, FacilityPayload } from './facilities.types';
 import { load, encryptAndSave } from '../../utils/localStorage.utils';
 import { initialState as facilitiesInitialState } from './facilities.reducer';
 import paginate from '../../utils/pagination.utils';
@@ -10,16 +10,23 @@ const handleError = (e: any) => {
   throw e;
 };
 
-export const createFacility = (body: Facility): Facility | void => {
+export const createFacility = (body: FacilityPayload): Facility | void => {
   try {
-    const initialState = facilitiesInitialState.data.facilities.results;
-    const facilities = load(MODEL_NAME, initialState);
+    const isFieldsNotFilled = Object.values(body).some((element) => isEmptySting(element));
+    if (isFieldsNotFilled) {
+      handleError(' All fields are required!');
+    } else {
+      const initialState = facilitiesInitialState.data.facilities.results;
+      const facilities = load(MODEL_NAME, initialState);
 
-    const newfacilitie: Facility = { ...body, id: uuidv4() };
-    facilities.unshift(newfacilitie);
-    encryptAndSave(MODEL_NAME, facilities);
+      const now = new Date();
 
-    return newfacilitie;
+      const newfacilitie: Facility = { ...body, id: uuidv4(), createdAt: now.toLocaleDateString('en-US') };
+      facilities.unshift(newfacilitie);
+      encryptAndSave(MODEL_NAME, facilities);
+
+      return newfacilitie;
+    }
   } catch (e) {
     handleError(e);
   }
@@ -71,18 +78,23 @@ export const getFacilityById = (id: string): Facility | void => {
 
 export const updateFacility = (id: string, body: Facility): Facility | void => {
   try {
-    const initialState = facilitiesInitialState.data.facilities.results;
-    let facilities = load(MODEL_NAME, initialState);
+    const isFieldsNotFilled = Object.values(body).some((element) => isEmptySting(element));
+    if (isFieldsNotFilled) {
+      handleError(' All fields are required!');
+    } else {
+      const initialState = facilitiesInitialState.data.facilities.results;
+      let facilities = load(MODEL_NAME, initialState);
 
-    facilities = facilities.map((element: Facility) => {
-      if (element.id === id) {
-        return body;
-      }
-      return element;
-    });
-    encryptAndSave(MODEL_NAME, facilities);
+      facilities = facilities.map((element: Facility) => {
+        if (String(element.id) === id) {
+          return body;
+        }
+        return element;
+      });
+      encryptAndSave(MODEL_NAME, facilities);
 
-    return body;
+      return body;
+    }
   } catch (e) {
     handleError(e);
   }
@@ -93,7 +105,7 @@ export const deleteFacilitie = (id: string): Facility | void => {
     const initialState = facilitiesInitialState.data.facilities.results;
     let facilities = load(MODEL_NAME, initialState);
 
-    facilities = facilities.filter((element: Facility) => element.id !== id);
+    facilities = facilities.filter((element: Facility) => String(element.id) !== id);
     encryptAndSave(MODEL_NAME, facilities);
 
     return facilities;

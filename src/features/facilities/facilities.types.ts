@@ -5,7 +5,7 @@ import {
   DELETE_FACILITY,
   GET_FACILITY_BY_ID,
   LOAD_MOCK_DATA,
-  OPEN_CREATE_OR_UPDATE_FACILITY_MODAL,
+  MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 
 export enum FacilityTypes {
@@ -20,6 +20,11 @@ export enum CreateOrUpdateModalStatus {
 export interface Facility {
   id: string | number;
   createdAt: string;
+  name: string;
+  type: string;
+  address: string;
+}
+export interface FacilityPayload {
   name: string;
   type: string;
   address: string;
@@ -65,7 +70,7 @@ export interface FacilitiesState {
 }
 
 export interface OpenCreateOrUpdateFacility {
-  type: typeof OPEN_CREATE_OR_UPDATE_FACILITY_MODAL;
+  type: typeof MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL;
   id?: string;
   status: string;
 }
@@ -75,7 +80,7 @@ export interface LoadMockDataRequest {
 }
 export interface CreateFacilityRequest {
   type: typeof CREATE_FACILITY.request;
-  body: Facility;
+  body: FacilityPayload;
 }
 export interface GetFacilitiesRequest {
   type: typeof GET_FACILITIES.request;

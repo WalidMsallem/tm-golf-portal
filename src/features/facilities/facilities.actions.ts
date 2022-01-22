@@ -5,7 +5,7 @@ import {
   DELETE_FACILITY,
   GET_FACILITY_BY_ID,
   LOAD_MOCK_DATA,
-  OPEN_CREATE_OR_UPDATE_FACILITY_MODAL,
+  MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 import {
   GetFacilitiesRequest,
@@ -16,10 +16,11 @@ import {
   Facility,
   LoadMockDataRequest,
   OpenCreateOrUpdateFacility,
+  FacilityPayload,
 } from './facilities.types';
 
-export const openCreateOrUpdateFacility = (status: string, id?: string): OpenCreateOrUpdateFacility => ({
-  type: OPEN_CREATE_OR_UPDATE_FACILITY_MODAL,
+export const manageCreateOrUpdateFacility = (status: string, id?: string): OpenCreateOrUpdateFacility => ({
+  type: MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
   id,
   status,
 });
@@ -30,7 +31,7 @@ export const getFacilitiesRequest = (page: string, search: string, facilityType:
   facilityType,
 });
 
-export const createFacilityRequest = (body: Facility): CreateFacilityRequest => ({
+export const createFacilityRequest = (body: FacilityPayload): CreateFacilityRequest => ({
   type: CREATE_FACILITY.request,
   body,
 });

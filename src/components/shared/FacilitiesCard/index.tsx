@@ -14,7 +14,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Tooltip from '@mui/material/Tooltip';
 import { hideLongText } from '../../../utils/string.utils';
 import { Facility, CreateOrUpdateModalStatus } from '../../../features/facilities/facilities.types';
-import { openCreateOrUpdateFacility } from '../../../features/facilities/facilities.actions';
+import { manageCreateOrUpdateFacility } from '../../../features/facilities/facilities.actions';
 
 const useStyles = makeStyles({
   root: {
@@ -73,7 +73,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
 
@@ -109,8 +109,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
         <Menu
           anchorEl={anchorEl}
           open={open}
-          onClose={handleClose}
-          // onClose={handleCloseDropDown}
+          onClose={handleCloseMenu}
           PaperProps={{
             style: {
               width: '10ch',
@@ -119,14 +118,23 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps) {
         >
           <MenuItem
             key={1}
-            onClick={() => dispatch(openCreateOrUpdateFacility(CreateOrUpdateModalStatus.update, String(id)))}
+            onClick={() => {
+              handleCloseMenu();
+              dispatch(manageCreateOrUpdateFacility(CreateOrUpdateModalStatus.update, String(id)));
+            }}
           >
             <SettingsIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
               Edit
             </Typography>
           </MenuItem>
-          <MenuItem key={2}>
+          <MenuItem
+            key={2}
+            onClick={() => {
+              handleCloseMenu();
+              // dispatch(manageCreateOrUpdateFacility(CreateOrUpdateModalStatus.update, String(id)));
+            }}
+          >
             <DeleteOutlinedIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
               Delete

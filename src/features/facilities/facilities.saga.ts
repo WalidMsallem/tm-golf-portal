@@ -18,7 +18,7 @@ import {
   UPDATE_FACILITY,
   DELETE_FACILITY,
   LOAD_MOCK_DATA,
-  OPEN_CREATE_OR_UPDATE_FACILITY_MODAL,
+  MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 import { getFacilityByIdRequest } from './facilities.actions';
 // uncomplete this to switch to an external server
@@ -119,7 +119,7 @@ export function* loadMockData(action: LoadMockDataRequest) {
     yield put({ type: LOAD_MOCK_DATA.failure, e });
   }
 }
-export function* openCreateOrUpdateFacility(action: OpenCreateOrUpdateFacility) {
+export function* manageCreateOrUpdateFacility(action: OpenCreateOrUpdateFacility) {
   try {
     if (action.id) {
       yield put(getFacilityByIdRequest(action.id));
@@ -137,7 +137,7 @@ function* FacilitiesSaga() {
     takeEvery(DELETE_FACILITY.request, deleteFacilitie),
     takeEvery(CREATE_FACILITY.request, createFacility),
     takeEvery(LOAD_MOCK_DATA.request, loadMockData),
-    takeEvery(OPEN_CREATE_OR_UPDATE_FACILITY_MODAL, openCreateOrUpdateFacility),
+    takeEvery(MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL, manageCreateOrUpdateFacility),
   ]);
 }
 

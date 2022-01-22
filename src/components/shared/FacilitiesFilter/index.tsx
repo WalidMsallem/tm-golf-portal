@@ -62,6 +62,9 @@ export default function FacilitiesFilter() {
                 {facilityType}
               </MenuItem>
             ))}
+            <MenuItem value="" key="default">
+              All
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>

@@ -71,18 +71,29 @@ type CustomModalPropsType = {
   children: JSX.Element | JSX.Element[];
   title: string;
   isOpen: boolean;
+  handleCloseModal: () => void;
+  handleSubmit: () => void;
+  loadingSubmitButton?: boolean;
+  disabledSubmitButton?: boolean;
+  textSubmitButton?: string;
 };
-export default function CustomModal({ bgColorSubmitButton, children, title, isOpen }: CustomModalPropsType) {
-  // const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-
+export default function CustomModal({
+  bgColorSubmitButton,
+  children,
+  title,
+  isOpen,
+  handleCloseModal,
+  handleSubmit,
+  loadingSubmitButton,
+  disabledSubmitButton,
+  textSubmitButton = 'Submit',
+}: CustomModalPropsType) {
   const classes = useStyles();
 
   return (
     <Modal
       open={isOpen}
-      // onClose={handleClose}
+      onClose={handleCloseModal}
       // aria-footerby="modal-modal-footer"
     >
       <Grid className={classes.root}>
@@ -98,19 +109,21 @@ export default function CustomModal({ bgColorSubmitButton, children, title, isOp
         <Divider />
 
         <Grid className={classes.footer}>
-          {/* <Typography variant="h6" component="h2">
-            Footer
-          </Typography> */}
-          <CancelButton>Cancel</CancelButton>
+          <CancelButton onClick={handleCloseModal}>Cancel</CancelButton>
           <SubmitButton
             sx={{
               backgroundColor: bgColorSubmitButton || '#EC691A',
               '&:hover': {
                 backgroundColor: bgColorSubmitButton || '#EC691A',
               },
+              '&:disabled': {
+                color: '#FFFFFF',
+              },
             }}
+            disabled={disabledSubmitButton}
+            onClick={handleSubmit}
           >
-            Save
+            {loadingSubmitButton ? 'Loading ...' : textSubmitButton}
           </SubmitButton>
         </Grid>
       </Grid>
