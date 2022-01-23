@@ -22,8 +22,9 @@
 	},
 	"FACILITIES_FILTER": {
 		"input/label/searchByName": "Recherche par nom",
-		"input/select/type": "Type",
-		"input/select/item/all": "Tous"
+		"select/label/type": "Type",
+		"select/option/type": "Tous",
+		"select/label/maxItemPerPage": "Max Item per page"
 	},
 	"FACILITY_CARD": {
 		"menu/edit": "Modifier",

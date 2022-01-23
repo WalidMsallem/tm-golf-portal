@@ -11,7 +11,7 @@ type LayoutProps = {
   children: JSX.Element | JSX.Element[];
 };
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: LayoutProps): JSX.Element {
   const classes = useStyles();
 
   return (

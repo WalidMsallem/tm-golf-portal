@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import Button, { ButtonProps } from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-export const CancelButton = styled(Button)<ButtonProps>(({ theme }) => ({
+export const CancelButton = styled(Button)<ButtonProps>(() => ({
   textTransform: 'uppercase',
   color: 'rgba(160, 160, 160, 1)',
   textAlign: 'center',
@@ -13,7 +13,7 @@ export const CancelButton = styled(Button)<ButtonProps>(({ theme }) => ({
   letterSpacing: '0.65px',
 }));
 
-export const SubmitButton = styled(Button)<ButtonProps>(({ theme }) => ({
+export const SubmitButton = styled(Button)<ButtonProps>(() => ({
   borderRadius: '4px',
   width: '160px',
   color: '#FFFFFF',

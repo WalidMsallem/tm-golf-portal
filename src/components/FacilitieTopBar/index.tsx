@@ -12,7 +12,7 @@ import { useStyles } from './styles';
 
 const componentPrefix = 'FACILITY_TOP_BAR.';
 
-export default function FacilitieTopBar() {
+export default function FacilitieTopBar(): JSX.Element {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();

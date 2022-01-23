@@ -21,7 +21,7 @@ import { useStyles } from './styles';
 
 const componentPrefix = 'DELETE_FACILITY.';
 
-export default function DeleteFacility() {
+export default function DeleteFacility(): JSX.Element {
   const loading = useSelector(loadingSelector);
   const errors = useSelector(errorsSelector);
   const modalsState = useSelector(modalsStateSelector);

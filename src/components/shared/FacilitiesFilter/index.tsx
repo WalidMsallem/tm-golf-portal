@@ -15,10 +15,14 @@ import { useStyles } from './styles';
 
 const componentPrefix = 'FACILITIES_FILTER.';
 
-export default function FacilitiesFilter() {
+export default function FacilitiesFilter(): JSX.Element {
   const [setQueries, getQueryByKey] = useQueries();
 
   const [searchValue, setSearchValue] = useState(getQueryByKey('search', ''));
+
+  const type = getQueryByKey('type', '');
+
+  const limit = getQueryByKey('limit', '');
 
   const debouncedValue = useDebounce<string>(searchValue, 500);
   const classes = useStyles();
@@ -37,8 +41,12 @@ export default function FacilitiesFilter() {
     event.preventDefault();
     setQueries({ type: event.target.value });
   };
+  const handleChangeMaxItem = (event: SelectChangeEvent) => {
+    event.preventDefault();
+    setQueries({ limit: event.target.value });
+  };
 
-  const type = getQueryByKey('type', '');
+  const maxItemOption = ['10', '15', '20', '25', '30', '35'];
 
   return (
     <Grid container className={classes.root}>
@@ -52,16 +60,28 @@ export default function FacilitiesFilter() {
       </Box>
       <Box className={classes.fieldContainer}>
         <FormControl fullWidth>
-          <InputLabel>{t(`${componentPrefix}input/select/type`)}</InputLabel>
-          <Select value={type} label="Type" onChange={handleChangeType}>
+          <InputLabel>{t(`${componentPrefix}select/label/type`)}</InputLabel>
+          <Select value={type} label={t(`${componentPrefix}select/label/type`)} onChange={handleChangeType}>
             {Object.values(FacilityTypes).map((facilityType) => (
               <MenuItem value={facilityType} key={facilityType}>
                 {facilityType}
               </MenuItem>
             ))}
             <MenuItem value="" key="default">
-              {t(`${componentPrefix}input/select/item/all`)}
+              {t(`${componentPrefix}select/option/type`)}
             </MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      <Box className={classes.fieldContainer}>
+        <FormControl fullWidth>
+          <InputLabel>{t(`${componentPrefix}select/label/maxItemPerPage`)}</InputLabel>
+          <Select value={limit} label={t(`${componentPrefix}select/label/maxItemPerPage`)} onChange={handleChangeMaxItem}>
+            {maxItemOption.map((item) => (
+              <MenuItem value={item} key={item}>
+                {item}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>

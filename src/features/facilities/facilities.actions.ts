@@ -32,9 +32,15 @@ export const manageCreateOrUpdateFacility = (status: string, id?: string): OpenC
   id,
   status,
 });
-export const getFacilitiesRequest = (page: string, search: string, facilityType: string): GetFacilitiesRequest => ({
+export const getFacilitiesRequest = (
+  page: string,
+  limit: string,
+  search: string,
+  facilityType: string
+): GetFacilitiesRequest => ({
   type: GET_FACILITIES.request,
   page,
+  limit,
   search,
   facilityType,
 });
