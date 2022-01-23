@@ -29,7 +29,7 @@ import { useStyles } from './styles';
 
 const componentPrefix = 'CREATE_OR_UPDATE_FACILITY.';
 
-export default function CreateOrUpdateFacility() {
+export default function CreateOrUpdateFacility(): JSX.Element {
   const loading = useSelector(loadingSelector);
   const errors = useSelector(errorsSelector);
   const modalsState = useSelector(modalsStateSelector);

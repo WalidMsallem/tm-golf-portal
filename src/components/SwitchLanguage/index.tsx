@@ -9,7 +9,7 @@ import { StyledMenu, useStyles } from './styles';
 
 const componentPrefix = 'SWITCH_LANGUAGE.';
 
-export default function SwitchLanguage() {
+export default function SwitchLanguage(): JSX.Element {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 

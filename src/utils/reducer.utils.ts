@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { toast } from 'react-toastify';
+import { notificationPrimaryConfig } from '../constants/global.constants';
 
 export const handleErrorMessage = (payload: object | any) => {
   let msg = '';
@@ -14,14 +15,6 @@ export const handleErrorMessage = (payload: object | any) => {
   } catch (e) {
     msg = 'Server error';
   }
-  toast.error(msg, {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
+  toast.error(msg, notificationPrimaryConfig);
   return msg;
 };

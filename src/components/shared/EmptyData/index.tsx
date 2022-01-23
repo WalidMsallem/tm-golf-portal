@@ -15,7 +15,7 @@ type EmptyDataPropsType = {
 
 const componentPrefix = 'EMPTY_DATA.';
 
-export default function EmptyData({ minHeight, message, iconSize }: EmptyDataPropsType) {
+export default function EmptyData({ minHeight, message, iconSize }: EmptyDataPropsType): JSX.Element {
   const classes = useStyles();
   const { t } = useTranslation();
 

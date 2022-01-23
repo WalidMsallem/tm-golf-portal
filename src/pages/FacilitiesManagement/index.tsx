@@ -18,11 +18,11 @@ import { load as loadFromLocalStorage } from '../../utils/localStorage.utils';
 import { useStyles } from './styles';
 
 import data from '../../constants/MOCK_DATA.json';
-import { IS_DUMMY_DATA_LOADED_KEY } from '../../constants/global.constants';
+import { IS_DUMMY_DATA_LOADED_KEY, LIMIT_ITEM_PER_PAGE } from '../../constants/global.constants';
 
 const componentPrefix = 'FACILITIES_MANAGEMENT.';
 
-const FacilitiesManagement = () => {
+const FacilitiesManagement = (): JSX.Element => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [setQueries, getQueryByKey] = useQueries();
@@ -30,6 +30,7 @@ const FacilitiesManagement = () => {
   const page = getQueryByKey('page', '1');
   const search = getQueryByKey('search', '');
   const type = getQueryByKey('type', '');
+  const limit = getQueryByKey('limit', LIMIT_ITEM_PER_PAGE);
 
   const loading = useSelector(loadingSelector);
   const facilities = useSelector(facilitiesSelector);
@@ -43,8 +44,8 @@ const FacilitiesManagement = () => {
   }, []);
 
   useEffect(() => {
-    if (isDummyDataLoaded) dispatch(getFacilitiesRequest(page, search, type));
-  }, [page, search, type]);
+    if (isDummyDataLoaded) dispatch(getFacilitiesRequest(page, limit, search, type));
+  }, [page, limit, search, type]);
 
   const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
     setQueries({ page: value });

@@ -92,6 +92,7 @@ export interface CreateFacilityRequest {
 export interface GetFacilitiesRequest {
   type: typeof GET_FACILITIES.request;
   page: string;
+  limit: string;
   search: string;
   facilityType: string;
 }

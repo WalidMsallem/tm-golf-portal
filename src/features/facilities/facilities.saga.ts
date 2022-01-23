@@ -1,6 +1,8 @@
 import { takeEvery, put, call, all, delay } from 'redux-saga/effects';
+
 // uncomplete this to switch to an external server
 // import { AxiosResponse } from 'axios';
+
 import {
   GetFacilitiesRequest,
   CreateFacilityRequest,
@@ -21,14 +23,21 @@ import {
   MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
 } from './facilities.actionTypes';
 import { getFacilityByIdRequest } from './facilities.actions';
+
 // uncomplete this to switch to an external server
 // import * as api from './facilities.services';
+
 import * as api from './facilities.localStorage.services';
 import { CALL_LOCAL_STORAGE_DELAY } from '../../constants/global.constants';
 
 export function* queryFacilities(action: GetFacilitiesRequest) {
   try {
-    const queries = new URLSearchParams({ page: action.page, search: action.search, type: action.facilityType }).toString();
+    const queries = new URLSearchParams({
+      page: action.page,
+      limit: action.limit,
+      search: action.search,
+      type: action.facilityType,
+    }).toString();
     // uncomplete this to switch to an external server
     // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);
     yield delay(CALL_LOCAL_STORAGE_DELAY);

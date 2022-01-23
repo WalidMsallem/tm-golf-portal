@@ -34,7 +34,7 @@ export const createFacility = (body: FacilityPayload): Facility | void => {
 
 export const queryFacilities = (queries: string): FacilitiesList | void => {
   try {
-    const { page: current, search, type } = parseSearchUrl(queries);
+    const { page: current, search, type, limit: maxItemPerPage } = parseSearchUrl(queries);
 
     const initialState = facilitiesInitialState.data.facilities.results;
 
@@ -51,7 +51,7 @@ export const queryFacilities = (queries: string): FacilitiesList | void => {
       pageSize: limit,
       totalPages,
       results,
-    } = paginate(facilities, current, 10);
+    } = paginate(facilities, current, maxItemPerPage);
 
     return {
       totalResults,

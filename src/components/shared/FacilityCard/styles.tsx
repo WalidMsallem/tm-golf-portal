@@ -45,6 +45,7 @@ export const useStyles = makeStyles({
     padding: '15px 25px !important',
     display: 'flex',
     justifyContent: 'space-between',
+    width: 275,
   },
   actions: {
     display: 'flex',

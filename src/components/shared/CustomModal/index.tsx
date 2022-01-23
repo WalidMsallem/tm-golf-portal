@@ -31,7 +31,7 @@ export default function CustomModal({
   disabledSubmitButton,
   textSubmitButton,
   contentMinHeight,
-}: CustomModalPropsType) {
+}: CustomModalPropsType): JSX.Element {
   const classes = useStyles();
 
   return (

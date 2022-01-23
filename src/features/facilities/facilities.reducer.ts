@@ -12,11 +12,8 @@ import {
 } from './facilities.actionTypes';
 import { FacilitiesActions, FacilitiesState, Facility, CreateOrUpdateModalStatus } from './facilities.types';
 import { handleErrorMessage } from '../../utils/reducer.utils';
-import {
-  load as loadFromLocalStorage,
-  encryptAndSave as encryptAndSaveInLocalStorage,
-} from '../../utils/localStorage.utils';
-import { IS_DUMMY_DATA_LOADED_KEY } from '../../constants/global.constants';
+import { encryptAndSave as encryptAndSaveInLocalStorage } from '../../utils/localStorage.utils';
+import { IS_DUMMY_DATA_LOADED_KEY, notificationPrimaryConfig } from '../../constants/global.constants';
 
 const facilityInitialState: Facility = {
   id: '',
@@ -85,15 +82,7 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.local.errors.createFacility = '';
         draft.data.facilities.results.unshift(action.data);
         draft.local.modals.openOrUpdateFacility = CreateOrUpdateModalStatus.close;
-        toast.success(`Facility created`, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(`Facility created`, notificationPrimaryConfig);
         break;
       case CREATE_FACILITY.failure:
         draft.local.loading.createFacility = false;
@@ -156,15 +145,7 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         });
         draft.local.modals.openOrUpdateFacility = CreateOrUpdateModalStatus.close;
         draft.data.facility = facilityInitialState;
-        toast.success(`Facility updated`, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(`Facility updated`, notificationPrimaryConfig);
         break;
       case UPDATE_FACILITY.failure:
         draft.local.loading.updateFacility = false;
@@ -181,16 +162,7 @@ const facilitiesReducer = (state: FacilitiesState = initialState, action: Facili
         draft.data.facilities.results = state.data.facilities.results.filter((element) => element.id !== action.data.id);
         draft.local.selectedItemId = undefined;
         draft.local.modals.deleteFacility = false;
-        console.log('action.data', action.data);
-        toast.success(`Facility ${action.data.name} was deleted`, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(`Facility ${action.data.name} was deleted`, notificationPrimaryConfig);
         break;
       case DELETE_FACILITY.failure:
         draft.local.loading.deleteFacilityById = false;
