@@ -24,7 +24,7 @@
 		"input/label/searchByName": "Search by name",
 		"select/label/type": "Type",
 		"select/option/type": "All",
-		"select/label/maxItemPerPage": "Max Item per page"
+		"select/label/maxItemPerPage": "Item Per page"
 	},
 	"FACILITY_CARD": {
 		"menu/edit": "Edit",
@@ -34,8 +34,9 @@
 		"emptyDataText": "There is no data available, please change the search criteria."
 	},
 	"SWITCH_LANGUAGE": {
-		"button/selectLanguage": "Select Language",
-		"select/english": "English",
-		"select/frensh": "French"
+		"select/language": "Language"
+	},
+	"CUSTOM_MODAL": {
+		"button/cancel": "Cancel"
 	}
 }

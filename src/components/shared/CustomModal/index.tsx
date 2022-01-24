@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { useTranslation } from 'react-i18next';
 
 import { CancelButton, SubmitButton, useStyles } from './styles';
+import { i18nComponentPrefix } from './constants';
 
 type CustomModalPropsType = {
   bgColorSubmitButton?: string;
@@ -33,10 +34,11 @@ export default function CustomModal({
   contentMinHeight,
 }: CustomModalPropsType): JSX.Element {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <Modal open={isOpen} onClose={handleCloseModal}>
-      <Grid className={classes.root}>
+      <Grid className={classes.root} data-cy="custom-modal-container">
         <Grid className={classes.title}>
           <Typography variant="h6" component="h2">
             {title}
@@ -49,8 +51,9 @@ export default function CustomModal({
         <Divider />
 
         <Grid className={classes.footer}>
-          <CancelButton onClick={handleCloseModal}>Cancel</CancelButton>
+          <CancelButton onClick={handleCloseModal}>{t(`${i18nComponentPrefix}button/cancel`)}</CancelButton>
           <SubmitButton
+            data-cy="custom-modal-submit"
             sx={{
               backgroundColor: bgColorSubmitButton || '#EC691A',
               '&:hover': {

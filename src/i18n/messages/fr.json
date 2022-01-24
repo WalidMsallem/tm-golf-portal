@@ -24,7 +24,7 @@
 		"input/label/searchByName": "Recherche par nom",
 		"select/label/type": "Type",
 		"select/option/type": "Tous",
-		"select/label/maxItemPerPage": "Max Item per page"
+		"select/label/maxItemPerPage": "Item par page"
 	},
 	"FACILITY_CARD": {
 		"menu/edit": "Modifier",
@@ -34,8 +34,9 @@
 		"emptyDataText": "Il n'y a pas de données disponibles, veuillez modifier les critères de recherche."
 	},
 	"SWITCH_LANGUAGE": {
-		"button/selectLanguage": "Sélectionner la langue",
-		"select/english": "Anglais",
-		"select/frensh": "Français"
+		"select/language": "Langue"
+	},
+	"CUSTOM_MODAL": {
+		"button/cancel": "Annuler"
 	}
 }

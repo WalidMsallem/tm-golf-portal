@@ -1,5 +1,7 @@
 import produce from 'immer';
 import { toast } from 'react-toastify';
+import { AnyAction } from 'redux';
+
 import {
   CREATE_FACILITY,
   DELETE_FACILITY,
@@ -10,7 +12,14 @@ import {
   MANAGE_CREATE_OR_UPDATE_FACILITY_MODAL,
   MANAGE_DELETE_FACILITY_MODAL,
 } from './facilities.actionTypes';
-import { FacilitiesActions, FacilitiesState, Facility, CreateOrUpdateModalStatus } from './facilities.types';
+import {
+  CreateFacilityRequest,
+  CreateFacilitySuccess,
+  FacilitiesActions,
+  FacilitiesState,
+  Facility,
+  CreateOrUpdateModalStatus,
+} from './facilities.types';
 import { handleErrorMessage } from '../../utils/reducer.utils';
 import { encryptAndSave as encryptAndSaveInLocalStorage } from '../../utils/localStorage.utils';
 import { IS_DUMMY_DATA_LOADED_KEY, notificationPrimaryConfig } from '../../constants/global.constants';
@@ -59,7 +68,8 @@ export const initialState: FacilitiesState = {
   },
 };
 
-const facilitiesReducer = (state: FacilitiesState = initialState, action: FacilitiesActions): FacilitiesState =>
+// const facilitiesReducer = (state: FacilitiesState = initialState, action: FacilitiesActions): FacilitiesState =>
+const facilitiesReducer = (state: FacilitiesState = initialState, action: AnyAction): FacilitiesState =>
   produce(state, (draft) => {
     switch (action.type) {
       case MANAGE_DELETE_FACILITY_MODAL:

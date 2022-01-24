@@ -2,7 +2,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import Header from '../Header';
 import { useStyles } from './styles';
@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps): JSX.Element {
       <Grid container className={classes.content}>
         {children}
       </Grid>
-      <ToastContainer />
+      <ToastContainer data-cy="toast-container" />
     </Grid>
   );
 }
