@@ -23,6 +23,12 @@ _At this point the frontend will run under `http://localhost:3000`._
 
 Now you're ready to rumble!
 
+## Demo
+
+Link of the demo on heroku :
+
+[Demo here](https://trackman-glof.herokuapp.com/)
+
 ## General overview
 
 This project provides an interface to manage Facilities with a shema of :
