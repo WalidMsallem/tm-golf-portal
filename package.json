@@ -48,7 +48,6 @@
 		"eject": "react-scripts eject",
 		"prettier": "prettier --check 'src/**/*.ts'",
 		"prettier:fix": "prettier --write 'src/**/*.ts'",
-		"test:A": "jest",
 		"test:watch": "jest --watch",
 		"test": "jest --detectOpenHandles --runInBand --forceExit src/*",
 		"cypress": "cypress open"
