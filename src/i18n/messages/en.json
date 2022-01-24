@@ -1,0 +1,42 @@
+{
+	"CREATE_OR_UPDATE_FACILITY": {
+		"label/input/facilityName": "Facility name",
+		"label/radio/indoor": "Indoor",
+		"label/radio/range": "Range",
+		"label/input/address": "address",
+		"button/saveChange": "Save change",
+		"modalTitle/editFacility": "Edit information",
+		"modalTitle/createFacility": "Create new Facility"
+	},
+	"DELETE_FACILITY": {
+		"modalTitle/deleteFacility": "Delete Facility",
+		"button/delete": "Delete",
+		"warning/part1": "Are you sure you want to delete this facility?",
+		"warning/part2": "You won’t be able to recover this data."
+	},
+	"FACILITY_TOP_BAR": {
+		"button/createFacility": "Create Facility"
+	},
+	"EMPTY_DATA": {
+		"defaultText": "No data"
+	},
+	"FACILITIES_FILTER": {
+		"input/label/searchByName": "Search by name",
+		"select/label/type": "Type",
+		"select/option/type": "All",
+		"select/label/maxItemPerPage": "Item Per page"
+	},
+	"FACILITY_CARD": {
+		"menu/edit": "Edit",
+		"menu/delete": "Delete"
+	},
+	"FACILITIES_MANAGEMENT": {
+		"emptyDataText": "There is no data available, please change the search criteria."
+	},
+	"SWITCH_LANGUAGE": {
+		"select/language": "Language"
+	},
+	"CUSTOM_MODAL": {
+		"button/cancel": "Cancel"
+	}
+}

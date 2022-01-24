@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "es5"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,9 +14,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react",
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "types": ["cypress", "cypress-localstorage-commands"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "**/*.ts"],
+  "exclude": ["node_modules"]
 }
