@@ -55,12 +55,20 @@ export default function FacilitiesFilter(): JSX.Element {
           variant="outlined"
           value={searchValue}
           onChange={handleChangeSearch}
+          className={classes.field}
+          data-cy="filter-search-by-name"
         />
       </Box>
       <Box className={classes.fieldContainer}>
         <FormControl fullWidth>
           <InputLabel>{t(`${i18nComponentPrefix}select/label/type`)}</InputLabel>
-          <Select value={type} label={t(`${i18nComponentPrefix}select/label/type`)} onChange={handleChangeType}>
+          <Select
+            value={type}
+            label={t(`${i18nComponentPrefix}select/label/type`)}
+            onChange={handleChangeType}
+            className={classes.field}
+            data-cy="filter-select-type"
+          >
             {Object.values(FacilityTypes).map((facilityType) => (
               <MenuItem value={facilityType} key={facilityType}>
                 {facilityType}
@@ -79,9 +87,11 @@ export default function FacilitiesFilter(): JSX.Element {
             value={limit}
             label={t(`${i18nComponentPrefix}select/label/maxItemPerPage`)}
             onChange={handleChangeMaxItem}
+            className={classes.field}
+            data-cy="filter-select-limit"
           >
             {maxItemOption.map((item) => (
-              <MenuItem value={item} key={item}>
+              <MenuItem value={item} key={item} data-cy={`option-${item}`}>
                 {item}
               </MenuItem>
             ))}

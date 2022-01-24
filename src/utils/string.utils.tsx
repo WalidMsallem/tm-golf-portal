@@ -14,10 +14,21 @@ export const hideLongText = (text: string, maxCharacters: number): ReactElement 
 
 export const isEmptySting = (str: string) => typeof str === 'string' && str.length === 0;
 
+export function isValidJSONString(str: string) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 export const parseSearchUrl = (url: string) => {
-  return isEmptySting(decodeURI(url).replace(/^[?]/, ''))
-    ? {}
-    : JSON.parse(
-        '{"' + decodeURI(url).replace(/^[?]/, '').replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}'
-      );
+  const stringifyURL =
+    '{"' + decodeURI(url).replace(/^[?]/, '').replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}';
+
+  if (isValidJSONString(stringifyURL)) {
+    return JSON.parse(stringifyURL);
+  }
+  return {};
 };

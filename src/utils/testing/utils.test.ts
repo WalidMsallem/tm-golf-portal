@@ -1,6 +1,6 @@
 import { generateActionTypes } from '../generic-redux';
 import paginate from '../pagination.utils';
-import { isEmptySting, parseSearchUrl } from '../string.utils';
+import { isEmptySting, parseSearchUrl, isValidJSONString } from '../string.utils';
 
 test('Test generateActionTypes', () => {
   const root = 'TEST/';
@@ -25,6 +25,16 @@ test('Test isEmptySting', () => {
 
 test('Test parseSearchUrl', () => {
   const string = '?search=solar&type=indoor&limit=10';
+  const wrongUrl = '?some wrong url';
 
   expect(parseSearchUrl(string).search).toBe('solar');
+  expect(parseSearchUrl(wrongUrl)).toEqual({});
+});
+test('Test isValidJSONString', () => {
+  const validString = '{"name":"Zaam-Dox"}';
+
+  const wrongString = 'wrong string';
+
+  expect(isValidJSONString(validString)).toBeTruthy();
+  expect(isValidJSONString(wrongString)).toBeFalsy();
 });

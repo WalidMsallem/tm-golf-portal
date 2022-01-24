@@ -65,7 +65,7 @@ const FacilitiesManagement = (): JSX.Element => {
       );
     }
     return (
-      <Grid container wrap="wrap" className={classes.list}>
+      <Grid container wrap="wrap" className={classes.list} data-cy="cards-container">
         {facilities.results.map((facilitieItem) => {
           return (
             <Grid item key={facilitieItem.id}>

@@ -20,13 +20,18 @@ export default function FacilitieTopBar(): JSX.Element {
     dispatch(manageCreateOrUpdateFacility(CreateOrUpdateModalStatus.create));
   };
   return (
-    <Grid className={classes.root}>
+    <Grid className={classes.root} data-context="container-facilities-top-bar">
       <Grid component="div" sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
         <FacilitiesFilter />
       </Grid>
 
       <Box sx={{ flexGrow: 0 }}>
-        <Button variant="contained" className={classes.button} onClick={handleOpenModal}>
+        <Button
+          variant="contained"
+          className={classes.button}
+          onClick={handleOpenModal}
+          data-cy="open-create-facility-modal"
+        >
           {t(`${i18nComponentPrefix}button/createFacility`)}
         </Button>
       </Box>

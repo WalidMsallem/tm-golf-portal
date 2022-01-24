@@ -14,7 +14,7 @@ export const createFacility = (body: FacilityPayload): Facility | void => {
   try {
     const isFieldsNotFilled = Object.values(body).some((element) => isEmptySting(element));
     if (isFieldsNotFilled) {
-      handleError(' All fields are required!');
+      handleError('All fields are required!');
     } else {
       const initialState = facilitiesInitialState.data.facilities.results;
       const facilities = load(MODEL_NAME, initialState);

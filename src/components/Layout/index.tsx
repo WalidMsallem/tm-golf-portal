@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps): JSX.Element {
       <Grid container className={classes.content}>
         {children}
       </Grid>
-      <ToastContainer />
+      <ToastContainer data-cy="toast-container" />
     </Grid>
   );
 }

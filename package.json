@@ -50,7 +50,8 @@
 		"prettier:fix": "prettier --write 'src/**/*.ts'",
 		"test:A": "jest",
 		"test:watch": "jest --watch",
-		"test": "jest --detectOpenHandles --runInBand --forceExit src/*"
+		"test": "jest --detectOpenHandles --runInBand --forceExit src/*",
+		"cypress": "cypress open"
 	},
 	"eslintConfig": {
 		"extends": [ "react-app", "react-app/jest" ]
@@ -64,6 +65,9 @@
 		"@types/crypto-js": "^4.1.0",
 		"@types/redux-logger": "^3.0.9",
 		"@types/redux-mock-store": "^1.0.3",
+		"@types/uuid": "^8.3.4",
+		"cypress": "^9.3.1",
+		"cypress-localstorage-commands": "^1.6.1",
 		"eslint": "^8.7.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-config-prettier": "^8.3.0",
@@ -75,7 +79,6 @@
 		"redux-mock-store": "^1.5.4"
 	},
 	"babel": {
-		"exclude": [],
 		"presets": [ "@babel/preset-env", "@babel/preset-react" ]
 	},
 	"jest": {

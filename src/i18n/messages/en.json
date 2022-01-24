@@ -24,7 +24,7 @@
 		"input/label/searchByName": "Search by name",
 		"select/label/type": "Type",
 		"select/option/type": "All",
-		"select/label/maxItemPerPage": "Max Item per page"
+		"select/label/maxItemPerPage": "Item Per page"
 	},
 	"FACILITY_CARD": {
 		"menu/edit": "Edit",

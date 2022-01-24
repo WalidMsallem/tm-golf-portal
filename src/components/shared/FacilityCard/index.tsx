@@ -43,7 +43,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        <Typography variant="h5" component="div" className={classes.title}>
+        <Typography variant="h5" component="div" className={classes.title} data-cy="card-facility-name">
           {hideLongText(name, 15)}
         </Typography>
         <Typography sx={{ mb: 1.5 }} className={classes.subTitle}>
@@ -63,6 +63,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
             aria-haspopup="true"
             onClick={handleClick}
             className={classes.menuButton}
+            data-cy="menu-item-button"
           >
             <MoreVertIcon />
           </IconButton>
@@ -70,6 +71,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
 
         <StyledMenu anchorEl={anchorEl} open={open} onClose={handleCloseMenu}>
           <MenuItem
+            data-cy="edit-item-button"
             key={1}
             onClick={() => {
               handleCloseMenu();
@@ -87,6 +89,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
               handleCloseMenu();
               dispatch(manageDeleteFacility(true, String(id)));
             }}
+            data-cy="delete-item-button"
           >
             <DeleteOutlinedIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>

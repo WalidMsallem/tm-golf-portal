@@ -11,5 +11,19 @@ export const useStyles = makeStyles((theme: Theme) => ({
   fieldContainer: {
     '& > :not(style)': { m: 1, width: '25ch' },
     marginLeft: '15px',
+    [theme.breakpoints.down(1040)]: {
+      maxWidth: '170px',
+    },
+    [theme.breakpoints.down(990)]: {
+      maxWidth: '140px',
+    },
+  },
+  field: {
+    [theme.breakpoints.down(1040)]: {
+      maxWidth: '170px',
+    },
+    [theme.breakpoints.down(990)]: {
+      maxWidth: '140px',
+    },
   },
 }));
