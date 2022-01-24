@@ -19,8 +19,7 @@ import { useStyles } from './styles';
 
 import data from '../../constants/MOCK_DATA.json';
 import { IS_DUMMY_DATA_LOADED_KEY, LIMIT_ITEM_PER_PAGE } from '../../constants/global.constants';
-
-const componentPrefix = 'FACILITIES_MANAGEMENT.';
+import { i18nComponentPrefix } from './constants';
 
 const FacilitiesManagement = (): JSX.Element => {
   const classes = useStyles();
@@ -54,11 +53,11 @@ const FacilitiesManagement = (): JSX.Element => {
   const renderFacililitiesList = () => {
     const skeletonData = Array(10).fill(0);
     if (!loading.fetchFacilities && facilities.results.length < 1) {
-      return <EmptyData message={t(`${componentPrefix}emptyDataText`)} iconSize="120px" />;
+      return <EmptyData message={t(`${i18nComponentPrefix}emptyDataText`)} iconSize="120px" />;
     }
     if (loading.fetchFacilities) {
       return (
-        <Grid container sx={{ marginX: 5 }}>
+        <Grid container className={classes.list}>
           {skeletonData.map((_: any, i: number) => (
             <CardSkeleton key={i} />
           ))}

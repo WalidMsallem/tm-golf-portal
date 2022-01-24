@@ -19,6 +19,7 @@ export enum CreateOrUpdateModalStatus {
 }
 export interface Facility {
   id: string | number;
+  // id: string;
   createdAt: string;
   name: string;
   type: string;
@@ -120,8 +121,8 @@ export interface CreateFacilitySuccess {
 }
 
 export type FacilitiesActions = CreateFacilitySuccess &
-  CreateFacilityRequest &
   GetFacilitiesRequest &
+  CreateFacilityRequest &
   UpdateFacilityRequest &
   DeleteFacilitieRequest &
   GetFacilityByIdRequest &

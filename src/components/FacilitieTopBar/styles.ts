@@ -1,6 +1,7 @@
 import { makeStyles } from '@mui/styles';
+import { Theme } from '@mui/system';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     background: '#ec691a33',
     width: '100%',
@@ -8,6 +9,9 @@ export const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    [theme.breakpoints.down('lg')]: {
+      justifyContent: 'center',
+    },
   },
   button: {
     borderRadius: '4px',
@@ -21,4 +25,4 @@ export const useStyles = makeStyles({
     padding: '10px 5px !important',
     margin: '0 20px !important',
   },
-});
+}));

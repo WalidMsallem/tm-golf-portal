@@ -34,8 +34,9 @@
 		"emptyDataText": "Il n'y a pas de données disponibles, veuillez modifier les critères de recherche."
 	},
 	"SWITCH_LANGUAGE": {
-		"button/selectLanguage": "Sélectionner la langue",
-		"select/english": "Anglais",
-		"select/frensh": "Français"
+		"select/language": "Langue"
+	},
+	"CUSTOM_MODAL": {
+		"button/cancel": "Annuler"
 	}
 }

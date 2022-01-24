@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { styled, alpha } from '@mui/material/styles';
 import Menu, { MenuProps } from '@mui/material/Menu';
+import { Theme } from '@mui/system';
 
 export const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -36,7 +37,7 @@ export const StyledMenu = styled((props: MenuProps) => (
   },
 }));
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme: Theme) => ({
   root: {
     boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.1)',
     borderRadius: 4,
@@ -46,6 +47,15 @@ export const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     width: 275,
+    [theme.breakpoints.down('lg')]: {
+      width: 350,
+    },
+    [theme.breakpoints.down(420)]: {
+      width: 250,
+    },
+    [theme.breakpoints.down(350)]: {
+      width: 200,
+    },
   },
   actions: {
     display: 'flex',
@@ -80,4 +90,4 @@ export const useStyles = makeStyles({
   menuButton: {
     padding: '0 !important',
   },
-});
+}));

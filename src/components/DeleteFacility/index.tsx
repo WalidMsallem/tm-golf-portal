@@ -18,8 +18,7 @@ import {
   errorsSelector,
 } from '../../features/facilities/facilities.selectors';
 import { useStyles } from './styles';
-
-const componentPrefix = 'DELETE_FACILITY.';
+import { i18nComponentPrefix } from './constants';
 
 export default function DeleteFacility(): JSX.Element {
   const loading = useSelector(loadingSelector);
@@ -32,7 +31,7 @@ export default function DeleteFacility(): JSX.Element {
 
   const isOpen = modalsState.deleteFacility;
   const loadingSubmitButton = loading.deleteFacilityById;
-  const modalTitle = t(`${componentPrefix}modalTitle/deleteFacility`);
+  const modalTitle = t(`${i18nComponentPrefix}modalTitle/deleteFacility`);
   const errorMessage = errors.createFacility || errors.updateFacility;
 
   const handleCloseModal = (): void => {
@@ -52,13 +51,13 @@ export default function DeleteFacility(): JSX.Element {
       loadingSubmitButton={loadingSubmitButton}
       // disabledSubmitButton
       handleSubmit={handleSubmit}
-      textSubmitButton={t(`${componentPrefix}button/delete`)}
+      textSubmitButton={t(`${i18nComponentPrefix}button/delete`)}
       contentMinHeight="100px"
       bgColorSubmitButton="#EE1B34"
     >
       <Grid container className={classes.root}>
-        <Typography>{t(`${componentPrefix}warning/part1`)}</Typography>
-        <Typography>{t(`${componentPrefix}warning/part2`)}</Typography>
+        <Typography>{t(`${i18nComponentPrefix}warning/part1`)}</Typography>
+        <Typography>{t(`${i18nComponentPrefix}warning/part2`)}</Typography>
 
         <Collapse in={!isEmptySting(errorMessage)} className={classes.collapseError}>
           <Alert className={classes.error} severity="error">

@@ -1,6 +1,6 @@
 /* eslint-disable  */
 
-export const requestHeader = (options: object | null, overrideToken?: string | any): object => {
+export const requestHeader = (options: object | null): object => {
   return {
     headers: {
       // laod token here

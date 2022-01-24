@@ -16,12 +16,11 @@ import { hideLongText } from '../../../utils/string.utils';
 import { Facility, CreateOrUpdateModalStatus } from '../../../features/facilities/facilities.types';
 import { manageCreateOrUpdateFacility, manageDeleteFacility } from '../../../features/facilities/facilities.actions';
 import { useStyles, StyledMenu } from './styles';
+import { i18nComponentPrefix } from './constants';
 
 type FacilitiesCardProps = {
   facilitieItem: Facility;
 };
-
-const componentPrefix = 'FACILITY_CARD.';
 
 function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -51,7 +50,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
           {type}
         </Typography>
         <Typography variant="body2" className={classes.description}>
-          {hideLongText(address, 30)}
+          {hideLongText(address, 25)}
         </Typography>
       </CardContent>
 
@@ -79,7 +78,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
           >
             <SettingsIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
-              {t(`${componentPrefix}menu/edit`)}
+              {t(`${i18nComponentPrefix}menu/edit`)}
             </Typography>
           </MenuItem>
           <MenuItem
@@ -91,7 +90,7 @@ function FacilitiesCard({ facilitieItem }: FacilitiesCardProps): JSX.Element {
           >
             <DeleteOutlinedIcon fontSize="small" />
             <Typography variant="body2" className={classes.textMenuItem}>
-              {t(`${componentPrefix}menu/delete`)}
+              {t(`${i18nComponentPrefix}menu/delete`)}
             </Typography>
           </MenuItem>
         </StyledMenu>

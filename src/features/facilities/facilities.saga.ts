@@ -1,6 +1,6 @@
 import { takeEvery, put, call, all, delay } from 'redux-saga/effects';
 
-// uncomplete this to switch to an external server
+// +++++ this to switch to an external server
 // import { AxiosResponse } from 'axios';
 
 import {
@@ -24,7 +24,7 @@ import {
 } from './facilities.actionTypes';
 import { getFacilityByIdRequest } from './facilities.actions';
 
-// uncomplete this to switch to an external server
+// +++++ this to switch to an external server
 // import * as api from './facilities.services';
 
 import * as api from './facilities.localStorage.services';
@@ -38,7 +38,7 @@ export function* queryFacilities(action: GetFacilitiesRequest) {
       search: action.search,
       type: action.facilityType,
     }).toString();
-    // uncomplete this to switch to an external server
+    // +++++ this to switch to an external server
     // const response: AxiosResponse<Facilitie[]> = yield call(api.queryFacilities, queries);
     yield delay(CALL_LOCAL_STORAGE_DELAY);
     const response: Facility[] = yield call(api.queryFacilities, queries);
@@ -53,7 +53,7 @@ export function* queryFacilities(action: GetFacilitiesRequest) {
 }
 export function* createFacility(action: CreateFacilityRequest) {
   try {
-    // uncomplete this to switch to an external server
+    // +++++ this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.createFacility, action.body);
 
     yield delay(CALL_LOCAL_STORAGE_DELAY);
@@ -69,7 +69,7 @@ export function* createFacility(action: CreateFacilityRequest) {
 }
 export function* getFacilityById(action: GetFacilityByIdRequest) {
   try {
-    // uncomplete this to switch to an external server
+    // +++++ this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.getFacilityById, action.id);
 
     yield delay(CALL_LOCAL_STORAGE_DELAY);
@@ -85,7 +85,7 @@ export function* getFacilityById(action: GetFacilityByIdRequest) {
 }
 export function* deleteFacilitie(action: DeleteFacilitieRequest) {
   try {
-    // uncomplete this to switch to an external server
+    // +++++ this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.deleteFacilitie, action.id);
 
     yield delay(CALL_LOCAL_STORAGE_DELAY);
@@ -101,7 +101,7 @@ export function* deleteFacilitie(action: DeleteFacilitieRequest) {
 }
 export function* updateFacility(action: UpdateFacilityRequest) {
   try {
-    // uncomplete this to switch to an external server
+    // +++++ this to switch to an external server
     // const response: AxiosResponse<Facilitie> = yield call(api.updateFacility, action.id, action.body);
 
     yield delay(CALL_LOCAL_STORAGE_DELAY);

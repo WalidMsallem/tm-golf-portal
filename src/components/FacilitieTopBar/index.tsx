@@ -9,8 +9,7 @@ import FacilitiesFilter from '../shared/FacilitiesFilter';
 import { manageCreateOrUpdateFacility } from '../../features/facilities/facilities.actions';
 import { CreateOrUpdateModalStatus } from '../../features/facilities/facilities.types';
 import { useStyles } from './styles';
-
-const componentPrefix = 'FACILITY_TOP_BAR.';
+import { i18nComponentPrefix } from './constants';
 
 export default function FacilitieTopBar(): JSX.Element {
   const classes = useStyles();
@@ -28,7 +27,7 @@ export default function FacilitieTopBar(): JSX.Element {
 
       <Box sx={{ flexGrow: 0 }}>
         <Button variant="contained" className={classes.button} onClick={handleOpenModal}>
-          {t(`${componentPrefix}button/createFacility`)}
+          {t(`${i18nComponentPrefix}button/createFacility`)}
         </Button>
       </Box>
     </Grid>
